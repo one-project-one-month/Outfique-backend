@@ -1,0 +1,10 @@
+services:
+  db:
+    image: postgres:13
+    container_name: outfique
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: outfique
+    ports:
+      - '5434:5432'
