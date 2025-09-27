@@ -45,7 +45,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/outfique || git clone https://github.com/<your-username>/outfique.git && cd outfique
+            cd ~/outfique || git clone https://github.com/one-project-one-month/Outfique-backend && cd outfique
             git pull origin main
             sudo docker compose -f docker-compose.yml pull
             sudo docker compose -f docker-compose.yml down --remove-orphans
