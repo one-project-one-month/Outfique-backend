@@ -22,12 +22,14 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push production image
-        uses: docker/build-push-action@2
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/outfique-app:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/outfique-app:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/outfique-app:${{ github.sha }}
           target: prod
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -43,11 +45,8 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Pull the latest image
+            cd ~/outfique || git clone https://github.com/<your-username>/outfique.git && cd outfique
+            git pull origin main
             sudo docker compose -f docker-compose.yml pull
-
-            # Stop and remove old containers
             sudo docker compose -f docker-compose.yml down --remove-orphans
-
-            # Start new containers
             sudo docker compose -f docker-compose.yml up -d
