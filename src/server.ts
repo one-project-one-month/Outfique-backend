@@ -1,11 +1,13 @@
-import app from './app';
 import dotenv from 'dotenv';
+dotenv.config();
+
+import app from './app';
 import { connectPrisma, disconnectPrisma } from './database';
 import { logger } from './utils/logger';
 
-dotenv.config();
+const PORT = process.env.PORT || 8000;
 
-const PORT = process.env.PORT || 3000;
+console.log('env file ', process.env.DATABASE_URL);
 
 async function startServer() {
   try {

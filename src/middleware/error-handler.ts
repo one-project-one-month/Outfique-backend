@@ -20,7 +20,7 @@ export const errorHandler = (
   let statusCode = 500;
   let message = 'Internal Server Error';
 
-  // Handle our custom database errors
+  // Handle  custom database errors from prosma
   if (error instanceof BadRequestError) {
     statusCode = 400;
     message = error.message;

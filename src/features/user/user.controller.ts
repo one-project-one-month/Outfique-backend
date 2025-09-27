@@ -6,12 +6,9 @@ import { CreateUserDto, UpdateUserDto } from './dto/userDto';
 export class UserController {
   async createUser(req: Request, res: Response): Promise<void> {
     const userData: CreateUserDto = req.body;
-    try {
-      const newUser = await userService.createUser(userData);
-      res.status(201).json(newUser);
-    } catch (error) {
-      res.status(500).send('Error creating user.');
-    }
+
+    const newUser = await userService.createUser(userData);
+    res.status(201).json(newUser);
   }
 
   async getUserById(req: Request, res: Response): Promise<void> {
@@ -31,7 +28,9 @@ export class UserController {
   async getAllUsers(req: Request, res: Response): Promise<void> {
     try {
       const users = await userService.getAllUsers();
-      res.status(200).json(users);
+      res.status(200).json({
+        message: 'hey ',
+      });
     } catch (error) {
       res.status(500).send('Error fetching users.');
     }
