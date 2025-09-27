@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PrismaClient = exports.NotFoundError = exports.ConflictError = exports.BadRequestError = exports.handlePrismaError = exports.healthCheck = exports.disconnectPrisma = exports.connectPrisma = exports.prisma = void 0;
+var prisma_service_1 = require("./prisma.service");
+Object.defineProperty(exports, "prisma", { enumerable: true, get: function () { return prisma_service_1.prisma; } });
+Object.defineProperty(exports, "connectPrisma", { enumerable: true, get: function () { return prisma_service_1.connectPrisma; } });
+Object.defineProperty(exports, "disconnectPrisma", { enumerable: true, get: function () { return prisma_service_1.disconnectPrisma; } });
+Object.defineProperty(exports, "healthCheck", { enumerable: true, get: function () { return prisma_service_1.healthCheck; } });
+var database_error_handler_1 = require("./database-error-handler");
+Object.defineProperty(exports, "handlePrismaError", { enumerable: true, get: function () { return database_error_handler_1.handlePrismaError; } });
+Object.defineProperty(exports, "BadRequestError", { enumerable: true, get: function () { return database_error_handler_1.BadRequestError; } });
+Object.defineProperty(exports, "ConflictError", { enumerable: true, get: function () { return database_error_handler_1.ConflictError; } });
+Object.defineProperty(exports, "NotFoundError", { enumerable: true, get: function () { return database_error_handler_1.NotFoundError; } });
+var prisma_1 = require("../../generated/prisma");
+Object.defineProperty(exports, "PrismaClient", { enumerable: true, get: function () { return prisma_1.PrismaClient; } });

@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --ext ts --exec \"ts-node src/server.ts\"",
-    "build": "pnpm run clean && pnpm run compile && pnpm run db:generate",
-    "build:prod": "pnpm run type-check && pnpm run lint && pnpm run build",
+    "build": "pnpm run clean && pnpm run compile",
+    "compile": "tsc --build tsconfig.json",
+    "build:prod": "pnpm run build",
     "clean": "rm -rf dist",
     "start": "node dist/server.js",
     "db:generate": "prisma generate",

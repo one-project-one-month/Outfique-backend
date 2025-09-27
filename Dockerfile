@@ -28,7 +28,7 @@ COPY . .
 
 RUN pnpm db:generate
 
-RUN pnpm build
+RUN pnpm run build:prod
 
 # Production image
 
@@ -41,7 +41,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm && pnpm install --prod
 
 COPY --from=build /app/dist ./dist
-COPY --from=build /app/src/generated/prisma ./src/generated/prisma
+COPY --from=build /app/generated/prisma generated/prisma
 
 EXPOSE 8000
 
