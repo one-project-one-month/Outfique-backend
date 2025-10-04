@@ -92,7 +92,7 @@ Now, follow the instructions for your chosen development method.
     This command will build and start the application and database containers in the background.
 
     ```bash
-    docker compose up -d --build
+     docker compose -f docker-compose.dev.yml up -d
     ```
 
 3.  **View Logs**
