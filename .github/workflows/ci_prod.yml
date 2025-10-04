@@ -1,9 +1,8 @@
 name: CI/CD Pipeline
-
 on:
   push:
     branches:
-      - main
+      - production
 
 jobs:
   build-and-push:
@@ -45,25 +44,37 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Check for Docker and install if not found
+            # Ensure Docker daemon is running
+            echo "Starting Docker daemon..."
+            sudo systemctl start docker
+            sudo systemctl enable docker
 
-            # Check if the directory exists. If not, clone the repository.
+            # Create project directory and clone if needed
             if [ ! -d "/home/${{ secrets.EC2_USER }}/outfique" ]; then
+              echo "Cloning repository..."
               cd /home/${{ secrets.EC2_USER }}
               git clone https://github.com/one-project-one-month/Outfique-backend.git outfique
             fi
 
-            # Navigate to the project directory
+            # Navigate to project directory
             cd /home/${{ secrets.EC2_USER }}/outfique
 
-            # Pull the latest code for deployment files
+            # Pull latest deployment configuration
+            echo "Pulling latest code..."
             git pull origin main
 
             # Pull the latest Docker image
+            echo "Pulling latest Docker image..."
             sudo docker compose pull
 
             # Stop and remove old containers
+            echo "Stopping old containers..."
             sudo docker compose down --remove-orphans
 
             # Start new containers
-            sudo docker compose up -d
+            echo "Starting new containers..."
+            sudo docker compose -f docker-compose.dev.yml up -d
+
+            # Show container status
+            echo "Container status:"
+            sudo docker compose ps

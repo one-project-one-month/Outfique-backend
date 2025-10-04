@@ -22,10 +22,7 @@ export class UserService {
     return users;
   }
 
-  async updateUser(
-    id: number,
-    updateData: UpdateUserDto
-  ): Promise<User | null> {
+  async updateUser(id: number, updateData: UpdateUserDto): Promise<User | null> {
     const updatedUser = await prisma.user.update({
       where: { userId: id },
       data: updateData,

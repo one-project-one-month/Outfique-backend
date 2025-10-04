@@ -1,5 +1,4 @@
 services:
-
   db:
     image: postgres:16-alpine
     restart: always
@@ -13,11 +12,12 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d outfique"]
+      test: ['CMD-SHELL', 'pg_isready -U user -d outfique']
       interval: 5s
       timeout: 5s
       retries: 5
-  app: 
+
+  app:
     build:
       context: .
       target: dev
@@ -28,13 +28,13 @@ services:
       - .:/app
       - /app/node_modules
     ports:
-      - "8000:8000"
+      - '8000:8000'
     environment:
-       - DATABASE_URL=postgresql://user:secret@db:5432/outfique
+      - DATABASE_URL=postgresql://user:secret@db:5432/outfique
+      - NODE_ENV=production
     depends_on:
-        db:
-          condition: service_healthy
-
+      db:
+        condition: service_healthy
 
 volumes:
   postgres_data:

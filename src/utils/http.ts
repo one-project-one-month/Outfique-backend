@@ -7,12 +7,7 @@ interface ResponseData {
   data: any;
 }
 
-export const responseData = ({
-  res,
-  status = 200,
-  message,
-  data,
-}: ResponseData) => {
+export const responseData = ({ res, status = 200, message, data }: ResponseData) => {
   res.status(status).json({
     status,
     message,

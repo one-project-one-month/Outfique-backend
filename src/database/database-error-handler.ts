@@ -27,14 +27,12 @@ export class NotFoundError extends Error {
 export const handlePrismaError = (error: unknown): never => {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     switch (error.code) {
-      case 'P2002':
+      case 'P2002': {
         // Unique constraint violation
         const field = error.meta?.target as string[] | string;
         const fieldName = Array.isArray(field) ? field.join(', ') : field;
-        throw new ConflictError(
-          `A record with this ${fieldName} already exists`
-        );
-
+        throw new ConflictError(`A record with this ${fieldName} already exists`);
+      }
       case 'P2025':
         // Record not found
         throw new NotFoundError('Record not found');

@@ -1,10 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { logger } from '../utils/logger';
-import {
-  BadRequestError,
-  ConflictError,
-  NotFoundError,
-} from '../database/database-error-handler';
+import { BadRequestError, ConflictError, NotFoundError } from '../database/database-error-handler';
+import { ZodError } from 'zod';
 
 export interface AppError extends Error {
   statusCode?: number;
@@ -16,9 +13,17 @@ export const errorHandler = (
   req: Request,
   res: Response,
   next: NextFunction
-): void => {
+) => {
   let statusCode = 500;
   let message = 'Internal Server Error';
+
+  if (error instanceof ZodError) {
+    return res.status(400).json({
+      success: false,
+      error: 'Validation error',
+      details: error.message,
+    });
+  }
 
   // Handle  custom database errors from prosma
   if (error instanceof BadRequestError) {

@@ -50,12 +50,7 @@ export const types = [
 ];
 export const scopes = [];
 export const scopeOverrides = {
-  fix: [
-    { name: 'merge' },
-    { name: 'style' },
-    { name: 'test' },
-    { name: 'hotfix' },
-  ],
+  fix: [{ name: 'merge' }, { name: 'style' }, { name: 'test' }, { name: 'hotfix' }],
 };
 export const allowCustomScopes = true;
 export const allowBreakingChanges = ['feat', 'fix'];

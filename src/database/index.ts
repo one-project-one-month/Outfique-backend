@@ -1,9 +1,4 @@
-export {
-  prisma,
-  connectPrisma,
-  disconnectPrisma,
-  healthCheck,
-} from './prisma.service';
+export { prisma, connectPrisma, disconnectPrisma, healthCheck } from './prisma.service';
 
 export {
   handlePrismaError,

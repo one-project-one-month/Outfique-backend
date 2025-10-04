@@ -1,11 +1,6 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 
-export default function catchAsync<
-  P = any,
-  ResBody = any,
-  ReqBody = any,
-  ReqQuery = any,
->(
+export default function catchAsync<P = any, ResBody = any, ReqBody = any, ReqQuery = any>(
   fn: (
     req: Request<P, ResBody, ReqBody, ReqQuery>,
     res: Response<ResBody>,

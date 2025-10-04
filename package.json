@@ -7,6 +7,9 @@
     "dev": "nodemon --ext ts --exec \"ts-node src/server.ts\"",
     "build": "pnpm run clean && pnpm run compile",
     "compile": "tsc --build tsconfig.json",
+    "lint": "eslint src --ext .ts",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write .",
     "build:prod": "pnpm run build",
     "clean": "rm -rf dist",
     "start": "node dist/server.js",
@@ -14,7 +17,15 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
-    "commit": "cz-customizable"
+    "commit": "cz-customizable",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write",
+      "npm run type-check"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -39,11 +50,10 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
-    "cz-customizable": "^7.5.1",
-    "@types/winston": "^2.4.4",
-    "eslint": "^9.34.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@prisma/client": "6.14.0",
+    "@eslint/js": "^9.32.0",
     "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
@@ -52,9 +62,16 @@
     "@types/morgan": "^1.9.10",
     "@types/multer": "^2.0.0",
     "@types/node": "^24.5.2",
+    "@types/winston": "^2.4.4",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "cz-customizable": "^7.5.1",
+    "eslint": "^9.34.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
-    "@prisma/client": "6.14.0",
     "prisma": "^6.14.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"

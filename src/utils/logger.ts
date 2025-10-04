@@ -90,11 +90,7 @@ class Logger {
         const frame = stack[i];
         const fileName = frame.getFileName();
 
-        if (
-          fileName &&
-          !fileName.includes('logger') &&
-          !fileName.includes('Logger')
-        ) {
+        if (fileName && !fileName.includes('logger') && !fileName.includes('Logger')) {
           callerFrame = frame;
           break;
         }
@@ -104,14 +100,11 @@ class Logger {
 
       const fileName = callerFrame.getFileName() || 'unknown';
       const lineNumber = callerFrame.getLineNumber() || 0;
-      const functionName =
-        callerFrame.getFunctionName() || callerFrame.getMethodName();
+      const functionName = callerFrame.getFunctionName() || callerFrame.getMethodName();
 
       // Get relative path from project root
       const relativePath = path.relative(this.projectRoot, fileName);
-      const shortFileName = relativePath.startsWith('..')
-        ? path.basename(fileName)
-        : relativePath;
+      const shortFileName = relativePath.startsWith('..') ? path.basename(fileName) : relativePath;
 
       return {
         fileName: shortFileName,
@@ -131,9 +124,7 @@ class Logger {
 
     const fileName = chalk.cyan(caller.fileName);
     const lineNumber = chalk.yellow(`:${caller.lineNumber}`);
-    const functionName = caller.functionName
-      ? chalk.magenta(` (${caller.functionName})`)
-      : '';
+    const functionName = caller.functionName ? chalk.magenta(` (${caller.functionName})`) : '';
 
     return chalk.gray(` [${fileName}${lineNumber}${functionName}]`);
   }
@@ -148,15 +139,10 @@ class Logger {
 
     if (Object.keys(filteredContext).length === 0) return '';
 
-    return chalk.gray(
-      '\n  ' + JSON.stringify(filteredContext, null, 2).replace(/\n/g, '\n  ')
-    );
+    return chalk.gray('\n  ' + JSON.stringify(filteredContext, null, 2).replace(/\n/g, '\n  '));
   }
 
-  private getLogPrefix(
-    level: string,
-    levelColor: (text: string) => string
-  ): string {
+  private getLogPrefix(level: string, levelColor: (text: string) => string): string {
     const timestamp = chalk.gray(`[${this.formatTimestamp()}]`);
     const caller = this.formatCaller(this.getCaller());
     const logLevel = levelColor(level.padEnd(5));
@@ -203,16 +189,12 @@ class Logger {
     const caller = this.formatCaller(this.getCaller());
     const method = this.getMethodColor(req.method)(req.method.padEnd(6));
     const url = chalk.cyan(req.originalUrl);
-    const status = this.getStatusColor(res.statusCode)(
-      res.statusCode.toString()
-    );
+    const status = this.getStatusColor(res.statusCode)(res.statusCode.toString());
     const time = chalk.gray(`${Math.round(responseTime)}ms`);
     const ip = chalk.gray(`${req.ip || req.socket.remoteAddress}`);
 
     // Create a clean one-liner for requests
-    console.info(
-      `${timestamp}${caller} ${method} ${url} ${status} ${time} ${ip}`
-    );
+    console.info(`${timestamp}${caller} ${method} ${url} ${status} ${time} ${ip}`);
 
     // Only show additional context for errors or in debug mode
     if (res.statusCode >= 400 || process.env.NODE_ENV === 'development') {
@@ -287,41 +269,25 @@ class Logger {
   }
 
   // Conditional logging
-  public errorIf(
-    condition: boolean,
-    message: string,
-    context?: LogContext
-  ): void {
+  public errorIf(condition: boolean, message: string, context?: LogContext): void {
     if (condition) {
       this.error(message, context);
     }
   }
 
-  public warnIf(
-    condition: boolean,
-    message: string,
-    context?: LogContext
-  ): void {
+  public warnIf(condition: boolean, message: string, context?: LogContext): void {
     if (condition) {
       this.warn(message, context);
     }
   }
 
-  public infoIf(
-    condition: boolean,
-    message: string,
-    context?: LogContext
-  ): void {
+  public infoIf(condition: boolean, message: string, context?: LogContext): void {
     if (condition) {
       this.info(message, context);
     }
   }
 
-  public debugIf(
-    condition: boolean,
-    message: string,
-    context?: LogContext
-  ): void {
+  public debugIf(condition: boolean, message: string, context?: LogContext): void {
     if (condition) {
       this.debug(message, context);
     }
