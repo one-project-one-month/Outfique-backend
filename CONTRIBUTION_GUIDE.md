@@ -195,6 +195,8 @@ git add .
 
 # 2. Commit using the interactive prompt
 pnpm run commit
+
+git push your branch
 ```
 
 The prompts will guide you to create a well-formatted commit message.
