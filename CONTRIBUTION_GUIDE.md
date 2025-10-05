@@ -128,13 +128,13 @@ Execute the commands inside the running `app` container.
 
 ```bash
 # Apply migrations
-docker compose exec app npx prisma migrate dev
+docker-compose -f docker-compose.dev.yml exec app npx prisma migrate dev
 
 # Generate Prisma Client
-docker compose exec app npx prisma generate
+docker compose -f docker-compose.dev.yml exec app npx prisma generate
 
 # (Optional) Open Prisma Studio. You'll need to map the port in docker-compose.yml.
-docker compose exec app npx prisma studio
+docker compose -f docker-compose.dev.yml exec app npx prisma studio
 ```
 
 ## 🚀 Development Workflow
