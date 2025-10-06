@@ -1,7 +1,13 @@
 import { Router } from 'express';
-import { saveOutfit } from './savedOutfit.controller';
+import {
+  getSavedOutfits,
+  saveOutfit,
+  unsaveOutfit,
+  updateSavedOutfit,
+} from './savedOutfit.controller';
 
 const router = Router();
 
-router.post('/', saveOutfit);
+router.route('/').post(saveOutfit);
+router.route('/:id').get(getSavedOutfits).delete(unsaveOutfit).patch(updateSavedOutfit);
 export const savedOutfitRoutes = router;

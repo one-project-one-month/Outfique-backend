@@ -8,6 +8,14 @@ export interface saveOutfitDto {
   feedbackNotes?: string;
 }
 
+export interface updateSavedOutfitDto {
+  selectionReason?: SelectionReason;
+  occasion?: string;
+  weatherConditionId?: number;
+  userRating?: number;
+  feedbackNotes?: string;
+}
+
 enum SelectionReason {
   LIKED = 'liked',
   DISLIKED = 'disliked',
