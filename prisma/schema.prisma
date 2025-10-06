@@ -3,8 +3,11 @@
 // Updated for Prisma 5+ by ChatGPT (GPT-5)
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  output        = "../generated/client"
+
 }
+
 
 datasource db {
   provider = "postgresql"

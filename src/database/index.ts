@@ -7,4 +7,4 @@ export {
   NotFoundError,
 } from './database-error-handler';
 
-export { PrismaClient } from '../../generated/prisma';
+export { PrismaClient } from '../../generated/client';

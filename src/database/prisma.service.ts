@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../generated/prisma';
+import { PrismaClient } from '../../generated/client';
 import { logger } from '../utils/logger';
 
 // Create the Prisma client instance

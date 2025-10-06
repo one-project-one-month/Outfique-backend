@@ -17,24 +17,5 @@ services:
       timeout: 5s
       retries: 5
 
-  app:
-    build:
-      context: .
-      target: dev
-    container_name: outfique_app
-    command: sh -c "npx prisma migrate deploy && pnpm dev"
-
-    volumes:
-      - .:/app
-      - /app/node_modules
-    ports:
-      - '8000:8000'
-    environment:
-      - DATABASE_URL=postgresql://user:secret@db:5432/outfique
-      - NODE_ENV=production
-    depends_on:
-      db:
-        condition: service_healthy
-
 volumes:
   postgres_data:
