@@ -1,3 +1,5 @@
+import { SelectionReason } from '../../../../generated/client';
+
 export interface saveOutfitDto {
   userId: string;
   outfitElementsId: number;
@@ -14,11 +16,4 @@ export interface updateSavedOutfitDto {
   weatherConditionId?: number;
   userRating?: number;
   feedbackNotes?: string;
-}
-
-enum SelectionReason {
-  LIKED = 'liked',
-  DISLIKED = 'disliked',
-  NEUTRAL = 'neutral',
-  PURCHASED = 'purchased',
 }
