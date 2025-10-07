@@ -5,11 +5,15 @@ import {
   unsaveOutfit,
   updateSavedOutfit,
 } from './savedOutfit.controller';
-import { saveOutfitValidation } from './dto/savedOutfitValidation';
+import { saveOutfitValidation, updateSavedOutfitValidation } from './dto/savedOutfitValidation';
 import { handleValidationErrors } from '../../middleware/validation-handler';
 
 const router = Router();
 
 router.route('/').post(saveOutfitValidation, handleValidationErrors, saveOutfit);
-router.route('/:id').get(getSavedOutfits).delete(unsaveOutfit).patch(updateSavedOutfit);
+router
+  .route('/:id')
+  .get(getSavedOutfits)
+  .delete(unsaveOutfit)
+  .patch(updateSavedOutfitValidation, handleValidationErrors, updateSavedOutfit);
 export const savedOutfitRoutes = router;

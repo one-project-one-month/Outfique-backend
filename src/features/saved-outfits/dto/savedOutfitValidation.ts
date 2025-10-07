@@ -1,8 +1,9 @@
-import { body } from 'express-validator';
+import { body, param } from 'express-validator';
 import { prisma } from '../../../database';
 import { SelectionReason } from '../../../../generated/client';
 
 const allowedReasons = Object.values(SelectionReason);
+
 export const saveOutfitValidation = [
   body('userId')
     .isString()
@@ -22,7 +23,7 @@ export const saveOutfitValidation = [
     }),
 
   body('outfitElementsId')
-    .isNumeric()
+    .isInt()
     .withMessage('Outfit Element ID be number.')
     .notEmpty()
     .withMessage('Outfit Element ID is required.')
@@ -32,8 +33,19 @@ export const saveOutfitValidation = [
           id: id,
         },
       });
+
       if (!ele) {
         return Promise.reject('Outfit Element not found.');
+      }
+
+      const isSaved = await prisma.userFavourite.findFirst({
+        where: {
+          outfitElementsId: id,
+        },
+      });
+
+      if (isSaved) {
+        return Promise.reject('Outfit already exists');
       }
     }),
   body('selectionReason')
@@ -43,7 +55,7 @@ export const saveOutfitValidation = [
   body('occasion').optional().isString().withMessage('Occasion must be string.'),
   body('weatherConditionId')
     .optional()
-    .isNumeric()
+    .isInt()
     .withMessage('weather Condition Id must be number.')
     .custom(async (id: number) => {
       const weatherCond = await prisma.weatherType.findUnique({
@@ -56,7 +68,43 @@ export const saveOutfitValidation = [
       }
     }),
 
-  body('userRating').optional().isNumeric().withMessage('User rating must be number'),
+  body('userRating').optional().isInt().withMessage('User rating must be number'),
+
+  body('feedbackNotes').optional().isString().withMessage('Feedback Notes must be String'),
+];
+
+export const updateSavedOutfitValidation = [
+  param('id').custom(async (id: number) => {
+    const savedOutfit = await prisma.userFavourite.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    if (!savedOutfit) {
+      return Promise.reject('');
+    }
+  }),
+  body('selectionReason')
+    .optional()
+    .isIn(allowedReasons)
+    .withMessage(`Selection reason must be one of: ${allowedReasons.join(', ')}`),
+  body('occasion').optional().isString().withMessage('Occasion must be string.'),
+  body('weatherConditionId')
+    .optional()
+    .isInt()
+    .withMessage('weather Condition Id must be number.')
+    .custom(async (id: number) => {
+      const weatherCond = await prisma.weatherType.findUnique({
+        where: {
+          id: id,
+        },
+      });
+      if (!weatherCond) {
+        return Promise.reject('Weather Type not found');
+      }
+    }),
+
+  body('userRating').optional().isInt().withMessage('User rating must be number'),
 
   body('feedbackNotes').optional().isString().withMessage('Feedback Notes must be String'),
 ];
