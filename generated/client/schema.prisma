@@ -1,0 +1,258 @@
+// Prisma Schema for Fashion Recommendation System
+// Author: Swan Htet Aung Phyo
+// Updated for Prisma 5+ by ChatGPT (GPT-5)
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =====================================================
+// ENUM DEFINITIONS
+// =====================================================
+
+enum Gender {
+  male
+  female
+  unisex
+  prefer_not_to_say
+}
+
+enum PrivacyLevel {
+  minimal
+  standard
+  enhanced
+}
+
+enum PriceRange {
+  budget
+  mid_range
+  luxury
+}
+
+enum FormalityLevel {
+  casual
+  semi_formal
+  formal
+  very_formal
+  ultra_formal
+}
+
+enum BudgetRange {
+  low
+  medium
+  high
+}
+
+enum SelectionReason {
+  liked
+  disliked
+  neutral
+  purchased
+}
+
+enum AgeGroup {
+  teen
+  young_adult
+  adult
+  mature
+}
+
+// =====================================================
+// AUTHENTICATION & USER MANAGEMENT TABLES (BetterAuth)
+// =====================================================
+
+model User {
+  id                  String       @id @default(uuid())
+  name                String
+  email               String       @unique
+  emailVerified       Boolean      @default(false)
+  image               String?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @default(now())
+  age                 Int?
+  height              Int?
+  birthday            DateTime
+  gender              Gender       @default(prefer_not_to_say)
+  isActive            Boolean      @default(true)
+  onboardingCompleted Boolean      @default(false)
+  privacyLevel        PrivacyLevel @default(standard)
+  timezone            String       @default("UTC")
+
+  // Relations
+  accounts       Account[]
+  preferences    UserPreference?
+  favourites     UserFavourite[]
+  digitalClosets OutfitInDigitalCloset[]
+
+  @@index([email])
+  @@index([isActive])
+}
+
+model Account {
+  id                    String    @id @default(uuid())
+  userId                String
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  idToken               String?
+  passwordHash          String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Verification {
+  id               String   @id @default(uuid())
+  identifier       String
+  value            String
+  expiresAt        DateTime
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now())
+  verificationType String   @default("email")
+}
+
+// =====================================================
+// FASHION DOMAIN REFERENCE TABLES
+// =====================================================
+
+model ColorPreference {
+  id               Int      @id @default(autoincrement())
+  colorName        String   @unique
+  hexCode          String?
+  shortDescription String?
+  createdAt        DateTime @default(now())
+  isActive         Boolean  @default(true)
+}
+
+model BodyType {
+  id             Int              @id @default(autoincrement())
+  gender         Gender           @default(unisex)
+  typeName       String
+  description    String
+  createdAt      DateTime         @default(now())
+  isActive       Boolean          @default(true)
+  UserPreference UserPreference[]
+
+  @@unique([gender, typeName])
+}
+
+model FashionStyle {
+  id             Int       @id @default(autoincrement())
+  styleName      String    @unique
+  description    String
+  socialRanking  Int       @default(0)
+  trendScore     Decimal   @default(0.0)
+  ageGroup       AgeGroup?
+  formalityLevel Int
+  createdAt      DateTime  @default(now())
+  isActive       Boolean   @default(true)
+}
+
+model OutfitCategory {
+  id           Int              @id @default(autoincrement())
+  categoryName String           @unique
+  description  String?
+  displayOrder Int              @default(0)
+  elements     OutfitElements[]
+}
+
+model OutfitElements {
+  id                Int         @id @default(autoincrement())
+  gender            Gender      @default(unisex)
+  categoryId        Int
+  elementName       String
+  brandName         String?
+  priceRange        PriceRange?
+  materialType      String?
+  careInstructions  String?
+  seasonSuitability String[]
+  formalityLevel    Int
+  createdAt         DateTime    @default(now())
+  isActive          Boolean     @default(true)
+
+  // Relations
+  category   OutfitCategory  @relation(fields: [categoryId], references: [id])
+  favourites UserFavourite[]
+
+  @@unique([gender, categoryId, elementName])
+}
+
+model WeatherType {
+  id          Int    @id @default(autoincrement())
+  weatherName String @unique
+  description String
+
+  UserFavourite UserFavourite[]
+}
+
+// =====================================================
+// USER PREFERENCE & INTERACTION TABLES
+// =====================================================
+
+model UserPreference {
+  id                    Int         @id @default(autoincrement())
+  userId                String      @unique
+  favoriteColors        Int[]
+  bodyTypeId            Int?
+  favoriteStyles        Int[]
+  budgetRange           BudgetRange @default(medium)
+  preferredBrands       String[]
+  styleConfidenceLevel  Int?
+  preferredWeatherTypes Int[]
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @default(now())
+
+  // Relations
+  user     User      @relation(fields: [userId], references: [id])
+  bodyType BodyType? @relation(fields: [bodyTypeId], references: [id])
+}
+
+model UserFavourite {
+  id                 Int              @id @default(autoincrement())
+  userId             String
+  outfitElementsId   Int
+  selectionReason    SelectionReason?
+  occasion           String?
+  weatherConditionId Int?
+  userRating         Int?
+  feedbackNotes      String?
+  selectedAt         DateTime         @default(now())
+
+  // Relations
+  user             User           @relation(fields: [userId], references: [id])
+  outfitElement    OutfitElements @relation(fields: [outfitElementsId], references: [id])
+  weatherCondition WeatherType?   @relation(fields: [weatherConditionId], references: [id])
+
+  @@unique([userId, outfitElementsId, selectedAt])
+}
+
+model OutfitInDigitalCloset {
+  id                Int      @id @default(autoincrement())
+  userId            String
+  outfitComposition Json     @default("{}")
+  outfitName        String
+  dominantColors    Int[]
+  styleTags         String[]
+  suitableOccasions String[]
+  suitableWeather   Int[]
+  styleDescription  String?
+  isFavorite        Boolean  @default(false)
+  suggestedAt       DateTime @default(now())
+  seasonRelevance   Decimal  @default(1.0)
+  trendRelevance    Decimal  @default(0.5)
+
+  // Relations
+  user User @relation(fields: [userId], references: [id])
+}

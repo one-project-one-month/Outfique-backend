@@ -1,18 +1,18 @@
-import { User } from '../../../generated/prisma';
+import { User } from '../../../generated/client';
 import { prisma } from '../../database';
 import { CreateUserDto, UpdateUserDto } from './dto/userDto';
 
 export class UserService {
-  async createUser(userData: CreateUserDto): Promise<User> {
-    const newUser = await prisma.user.create({
-      data: userData,
-    });
-    return newUser;
-  }
+  // async createUser(userData: CreateUserDto): Promise<User> {
+  //   const newUser = await prisma.user.create({
+  //     data: userData,
+  //   });
+  //   return newUser;
+  // }
 
-  async getUserById(id: number): Promise<User | null> {
+  async getUserById(id: string): Promise<User | null> {
     const user = await prisma.user.findUnique({
-      where: { userId: id },
+      where: { id: id },
     });
     return user;
   }
@@ -22,17 +22,17 @@ export class UserService {
     return users;
   }
 
-  async updateUser(id: number, updateData: UpdateUserDto): Promise<User | null> {
+  async updateUser(id: string, updateData: UpdateUserDto): Promise<User | null> {
     const updatedUser = await prisma.user.update({
-      where: { userId: id },
+      where: { id: id },
       data: updateData,
     });
     return updatedUser;
   }
 
-  async deleteUser(id: number): Promise<User> {
+  async deleteUser(id: string): Promise<User> {
     const deletedUser = await prisma.user.delete({
-      where: { userId: id },
+      where: { id: id },
     });
     return deletedUser;
   }

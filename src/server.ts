@@ -41,4 +41,4 @@ async function startServer() {
   }
 }
 
-startServer().then((r) => logger.info('Server started yeah' + r));
+startServer().then((r) => logger.info('Server started ' + r));

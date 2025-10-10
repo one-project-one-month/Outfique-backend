@@ -1,4 +1,4 @@
-import { Prisma } from '../../generated/prisma';
+import { Prisma } from '../../generated/client';
 
 export class BadRequestError extends Error {
   statusCode = 400;

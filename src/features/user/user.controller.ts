@@ -1,18 +1,18 @@
 import { Request, Response } from 'express';
 
 import { userService } from './user.service';
-import { CreateUserDto, UpdateUserDto } from './dto/userDto';
+import { UpdateUserDto } from './dto/userDto';
 
 export class UserController {
-  async createUser(req: Request, res: Response): Promise<void> {
-    const userData: CreateUserDto = req.body;
+  // async createUser(req: Request, res: Response): Promise<void> {
+  //   const userData: CreateUserDto = req.body;
 
-    const newUser = await userService.createUser(userData);
-    res.status(201).json(newUser);
-  }
+  //   const newUser = await userService.createUser(userData);
+  //   res.status(201).json(newUser);
+  // }
 
   async getUserById(req: Request, res: Response): Promise<void> {
-    const id = parseInt(req.params.id, 10);
+    const id = req.params.id;
     try {
       const user = await userService.getUserById(id);
       if (user) {
@@ -37,7 +37,7 @@ export class UserController {
   }
 
   async updateUser(req: Request, res: Response): Promise<void> {
-    const id = parseInt(req.params.id, 10);
+    const id = req.params.id;
     const updateData: UpdateUserDto = req.body;
     try {
       const updatedUser = await userService.updateUser(id, updateData);
@@ -52,7 +52,7 @@ export class UserController {
   }
 
   async deleteUser(req: Request, res: Response): Promise<void> {
-    const id = parseInt(req.params.id, 10);
+    const id = req.params.id;
     try {
       await userService.deleteUser(id);
       res.status(204).send();

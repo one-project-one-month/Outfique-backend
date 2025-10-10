@@ -87,6 +87,8 @@ Now, follow the instructions for your chosen development method.
     DATABASE_URL="postgresql://postgres:postgres@db:5432/myapp_dev"
     ```
 
+    Database credentials in the env file must match with the credentails in the docker compose
+
 2.  **Start Docker Services**
 
     This command will build and start the application and database containers in the background.
@@ -95,46 +97,21 @@ Now, follow the instructions for your chosen development method.
      docker compose -f docker-compose.dev.yml up -d
     ```
 
-3.  **View Logs**
-
-    To monitor the application logs, use:
-
-    ```bash
-    docker compose logs -f app
-    ```
-
 ## 🗄️ Database Migrations
 
 After setting up your environment, you need to run the database migrations.
-
-#### For Local Development
 
 Run these commands in your local terminal.
 
 ```bash
 # Apply migrations
-pnpm exec prisma migrate dev
+pnpm db:migrate
 
 # Generate Prisma Client
-pnpm exec prisma generate
+pnpm db:generate
 
 # (Optional) Open Prisma Studio to view/edit data
-pnpm exec prisma studio
-```
-
-#### Inside Docker
-
-Execute the commands inside the running `app` container.
-
-```bash
-# Apply migrations
-docker-compose -f docker-compose.dev.yml exec app npx prisma migrate dev
-
-# Generate Prisma Client
-docker compose -f docker-compose.dev.yml exec app npx prisma generate
-
-# (Optional) Open Prisma Studio. You'll need to map the port in docker-compose.yml.
-docker compose -f docker-compose.dev.yml exec app npx prisma studio
+pnpm db:studio
 ```
 
 ## 🚀 Development Workflow
