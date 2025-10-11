@@ -1,8 +1,9 @@
+import { UserFavourite } from '../../../generated/client';
 import { PrismaClient, prisma } from '../../database';
 import { saveOutfitDto, updateSavedOutfitDto } from './dto/savedOutfitDto';
 
 export class SaveOutfitService {
-  async saveOutfit(outfitData: saveOutfitDto): Promise<any> {
+  async saveOutfit(outfitData: saveOutfitDto): Promise<UserFavourite> {
     const savedOutfit = await prisma.userFavourite.create({
       data: outfitData,
     });
@@ -16,7 +17,7 @@ export class SaveOutfitService {
     return savedOutfits;
   }
 
-  async removeOutfit(id: number): Promise<any> {
+  async removeOutfit(id: number): Promise<UserFavourite> {
     const unsavedOutfit = await prisma.userFavourite.delete({
       where: {
         id: id,
@@ -25,7 +26,7 @@ export class SaveOutfitService {
     return unsavedOutfit;
   }
 
-  async updateSavedOutfit(id: number, updateData: updateSavedOutfitDto): Promise<any> {
+  async updateSavedOutfit(id: number, updateData: updateSavedOutfitDto): Promise<UserFavourite> {
     const updatedSavedOutfit = await prisma.userFavourite.update({
       where: {
         id: id,
