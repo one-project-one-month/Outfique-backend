@@ -2,30 +2,38 @@ import { Request, Response, NextFunction } from 'express';
 import catchAsync from '../../utils/catchAsync';
 import { saveOutfitDto } from './dto/savedOutfitDto';
 import { saveOutfitService } from './savedOutfit.service';
+import { responseData } from '../../utils/http';
+import { logger } from '../../utils/logger';
 
 export const saveOutfit = catchAsync(async (req: Request, res: Response) => {
   const savedOutfitData: saveOutfitDto = req.body;
   const savedOutfit = await saveOutfitService.saveOutfit(savedOutfitData);
-  res.status(200).json({
-    status: 'success',
+  return responseData({
+    res,
+    status: 200,
+    message: 'successful',
     data: savedOutfit,
   });
 });
 
 export const getSavedOutfits = catchAsync(async (req: Request, res: Response) => {
+  logger.info('Get User saved outfit');
   const savedOutfits = await saveOutfitService.getSavedOutfits(req.params.id);
-
-  res.status(200).json({
-    status: 'success',
+  return responseData({
+    res,
+    status: 200,
+    message: 'successful',
     data: savedOutfits,
   });
 });
 
-export const unsaveOutfit = catchAsync(async (req: Request, res: Response) => {
-  const unsavedOutfit = await saveOutfitService.unsaveOutfit(Number(req.params.id));
-  res.status(200).json({
-    status: 'success',
-    data: unsavedOutfit,
+export const removeOutfit = catchAsync(async (req: Request, res: Response) => {
+  const removedOutfit = await saveOutfitService.removeOutfit(Number(req.params.id));
+  return responseData({
+    res,
+    status: 200,
+    message: 'successful',
+    data: removedOutfit,
   });
 });
 
@@ -34,8 +42,10 @@ export const updateSavedOutfit = catchAsync(async (req: Request, res: Response) 
     Number(req.params.id),
     req.body
   );
-  res.status(200).json({
-    status: 'success',
+  return responseData({
+    res,
+    status: 200,
+    message: 'successful',
     data: updatedSavedOutfit,
   });
 });

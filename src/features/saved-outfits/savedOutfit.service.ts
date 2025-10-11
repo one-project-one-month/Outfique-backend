@@ -16,7 +16,7 @@ export class SaveOutfitService {
     return savedOutfits;
   }
 
-  async unsaveOutfit(id: number): Promise<any> {
+  async removeOutfit(id: number): Promise<any> {
     const unsavedOutfit = await prisma.userFavourite.delete({
       where: {
         id: id,

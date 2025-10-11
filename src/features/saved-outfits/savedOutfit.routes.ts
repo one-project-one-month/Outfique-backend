@@ -2,7 +2,7 @@ import { Router } from 'express';
 import {
   getSavedOutfits,
   saveOutfit,
-  unsaveOutfit,
+  removeOutfit,
   updateSavedOutfit,
 } from './savedOutfit.controller';
 import { saveOutfitValidation, updateSavedOutfitValidation } from './dto/savedOutfitValidation';
@@ -14,6 +14,6 @@ router.route('/').post(saveOutfitValidation, handleValidationErrors, saveOutfit)
 router
   .route('/:id')
   .get(getSavedOutfits)
-  .delete(unsaveOutfit)
+  .delete(removeOutfit)
   .patch(updateSavedOutfitValidation, handleValidationErrors, updateSavedOutfit);
 export const savedOutfitRoutes = router;
