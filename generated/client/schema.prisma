@@ -77,7 +77,7 @@ model User {
   updatedAt           DateTime     @default(now())
   age                 Int?
   height              Int?
-  birthday            DateTime
+  birthday            DateTime?
   gender              Gender       @default(prefer_not_to_say)
   isActive            Boolean      @default(true)
   onboardingCompleted Boolean      @default(false)
@@ -89,9 +89,23 @@ model User {
   preferences    UserPreference?
   favourites     UserFavourite[]
   digitalClosets OutfitInDigitalCloset[]
+  sessions       Session[]
 
   @@index([email])
   @@index([isActive])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ipAddress String?
+  userAgent String?
 }
 
 model Account {
@@ -105,7 +119,7 @@ model Account {
   refreshTokenExpiresAt DateTime?
   scope                 String?
   idToken               String?
-  passwordHash          String?
+  password              String?
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @default(now())
 

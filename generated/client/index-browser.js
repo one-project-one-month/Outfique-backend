@@ -138,6 +138,17 @@ exports.Prisma.UserScalarFieldEnum = {
   timezone: 'timezone'
 };
 
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent'
+};
+
 exports.Prisma.AccountScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -149,7 +160,7 @@ exports.Prisma.AccountScalarFieldEnum = {
   refreshTokenExpiresAt: 'refreshTokenExpiresAt',
   scope: 'scope',
   idToken: 'idToken',
-  passwordHash: 'passwordHash',
+  password: 'password',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -329,6 +340,7 @@ exports.SelectionReason = exports.$Enums.SelectionReason = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
   ColorPreference: 'ColorPreference',
