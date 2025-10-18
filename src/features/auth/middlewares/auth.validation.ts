@@ -1,11 +1,11 @@
-import { Request, Response, NextFunction } from "express";
-import { signUpDto } from "../dto/signUpDto";
+import { Request, Response, NextFunction } from 'express';
+import { OnBoardingDto } from '../dto/OnBoardingDto';
 
-export const validateSignup = (req: Request, res: Response, next: NextFunction) => {
-  const result = signUpDto.safeParse(req.body);
+export const validateOnBoarding = (req: Request, res: Response, next: NextFunction) => {
+  const result = OnBoardingDto.safeParse(req.body);
   if (!result.success) {
     return res.status(400).json({ errors: result.error.format() });
   }
-  req.body = result.data; // sanitized & typed
+  req.body = result.data;
   next();
 };

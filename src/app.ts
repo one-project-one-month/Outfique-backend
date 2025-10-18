@@ -9,6 +9,8 @@ import { logger } from './utils/logger';
 
 import { errorHandler } from './middleware/error-handler';
 import routes from './routes';
+import { toNodeHandler } from 'better-auth/node';
+import { auth } from './features/auth/auth';
 
 const app = express();
 
@@ -39,6 +41,9 @@ app.use((req, res, next) => {
 });
 
 app.use(`/api/${API_VERSION}`, routes);
+
+// Mount all Better Auth routes at /api/auth
+app.use('/api/auth', toNodeHandler(auth));
 
 app.use(errorHandler);
 

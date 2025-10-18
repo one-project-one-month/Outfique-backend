@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev": "nodemon --ext ts --exec tsx src/server.ts",
     "build": "pnpm run clean && pnpm run compile",
@@ -18,14 +17,17 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
-    "commit": "cz-customizable",
+    "commit": "npx git-cz",
     "prepare": "husky"
   },
   "config": {
-  "commitizen": {
-    "path": "cz-customizable"
-  }
-},
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".cz-config.cjs"
+    }
+  },
   "lint-staged": {
     "*.ts": [
       "eslint --fix",
@@ -57,6 +59,7 @@
     "multer": "^2.0.2",
     "openai": "^5.22.1",
     "pino": "^9.11.0",
+    "resend": "^6.2.0",
     "uuid": "^13.0.0",
     "winston": "^3.17.0",
     "zod": "^4.1.11"

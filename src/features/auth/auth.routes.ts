@@ -1,12 +1,22 @@
-import { Router } from "express";
-import { AuthController } from "./auth.controller";
+import { Router } from 'express';
+import { auth } from './auth';
+import { toNodeHandler } from 'better-auth/node';
+import { authMiddleware } from './middlewares/auth';
+import { validateOnBoarding } from './middlewares/auth.validation';
+import { onBoardingController } from './onBoarding.controller';
 
 const router = Router();
 
-router.post("/signup", AuthController.signup);
-router.post("/login", AuthController.login);
-router.post("/logout", AuthController.signout);
-router.get('/login/social',AuthController.socialSignIn)
+// const betterAuthHandler = toNodeHandler(auth);
 
+// // router.all('/*', toNodeHandler(auth));
+// router.use(betterAuthHandler);
 
-export default router
+router.put(
+  '/onboarding',
+  authMiddleware,
+  validateOnBoarding,
+  onBoardingController.updateOnBoarding
+);
+
+export default router;

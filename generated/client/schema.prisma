@@ -72,19 +72,23 @@ model User {
   name                String
   email               String       @unique
   emailVerified       Boolean      @default(false)
-  image               String?
   createdAt           DateTime     @default(now())
   updatedAt           DateTime     @default(now())
-  age                 Int?
   height              Int?
+  weight              Int?
   birthday            DateTime?
-  gender              Gender       @default(prefer_not_to_say)
+  gender              Gender?
+  color               String[]
   isActive            Boolean      @default(true)
   onboardingCompleted Boolean      @default(false)
   privacyLevel        PrivacyLevel @default(standard)
   timezone            String       @default("UTC")
 
-  // Relations
+  // Per-user relations
+  bodyType      UserBodyType?
+  accessories   UserAccessory[]
+  fashionStyles UserFashionStyle[]
+
   accounts       Account[]
   preferences    UserPreference?
   favourites     UserFavourite[]
@@ -93,6 +97,39 @@ model User {
 
   @@index([email])
   @@index([isActive])
+}
+
+model UserBodyType {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  name        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model UserAccessory {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model UserFashionStyle {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Session {
@@ -123,7 +160,6 @@ model Account {
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @default(now())
 
-  // Relations
   user User @relation(fields: [userId], references: [id])
 }
 
@@ -150,29 +186,29 @@ model ColorPreference {
   isActive         Boolean  @default(true)
 }
 
-model BodyType {
-  id             Int              @id @default(autoincrement())
-  gender         Gender           @default(unisex)
-  typeName       String
-  description    String
-  createdAt      DateTime         @default(now())
-  isActive       Boolean          @default(true)
-  UserPreference UserPreference[]
+// model BodyType {
+//   id             Int              @id @default(autoincrement())
+//   gender         Gender           @default(unisex)
+//   typeName       String
+//   description    String
+//   createdAt      DateTime         @default(now())
+//   isActive       Boolean          @default(true)
+//   UserPreference UserPreference[]
 
-  @@unique([gender, typeName])
-}
+//   @@unique([gender, typeName])
+// }
 
-model FashionStyle {
-  id             Int       @id @default(autoincrement())
-  styleName      String    @unique
-  description    String
-  socialRanking  Int       @default(0)
-  trendScore     Decimal   @default(0.0)
-  ageGroup       AgeGroup?
-  formalityLevel Int
-  createdAt      DateTime  @default(now())
-  isActive       Boolean   @default(true)
-}
+// model FashionStyle {
+//   id             Int       @id @default(autoincrement())
+//   styleName      String    @unique
+//   description    String
+//   socialRanking  Int       @default(0)
+//   trendScore     Decimal   @default(0.0)
+//   ageGroup       AgeGroup?
+//   formalityLevel Int
+//   createdAt      DateTime  @default(now())
+//   isActive       Boolean   @default(true)
+// }
 
 model OutfitCategory {
   id           Int              @id @default(autoincrement())
@@ -229,8 +265,8 @@ model UserPreference {
   updatedAt             DateTime    @default(now())
 
   // Relations
-  user     User      @relation(fields: [userId], references: [id])
-  bodyType BodyType? @relation(fields: [bodyTypeId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+  // bodyType BodyType? @relation(fields: [bodyTypeId], references: [id])
 }
 
 model UserFavourite {
