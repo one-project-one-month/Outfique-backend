@@ -45,7 +45,7 @@
     "adapters@latest": "link:better-auth/adapters@latest",
     "axios": "^1.12.2",
     "bcrypt": "^6.0.0",
-    "better-auth": "^1.3.27",
+    "better-auth": "^1.3.28",
     "chalk": "^4.1.2",
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",

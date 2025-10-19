@@ -27,8 +27,8 @@ export const auth = betterAuth({
 
   socialProviders: {
     google: {
-      enabled: true,
-      prompt: 'select_account',
+      // enabled: true,
+      // prompt: "select_account",
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       redirectURI: process.env.BETTER_AUTH_URL + '/api/auth/callback/google',
@@ -45,5 +45,6 @@ console.log('🔐 Better Auth Configuration:');
 console.log('   baseURL:', process.env.BETTER_AUTH_URL || 'http://localhost:3000');
 console.log('   Google Client ID:', process.env.GOOGLE_CLIENT_ID ? '✅ Set' : '❌ Not Set');
 console.log('   Google Client Secret:', process.env.GOOGLE_CLIENT_SECRET ? '✅ Set' : '❌ Not Set');
+console.log('   Resend', process.env.RESEND_API_KEY ? '✅ Set' : '❌ Not Set');
 
-console.log('resend key', process.env.RESEND_API_KEY);
+
