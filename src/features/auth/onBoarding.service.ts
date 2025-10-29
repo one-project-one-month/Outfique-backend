@@ -1,6 +1,15 @@
-import { User } from '../../../generated/client';
+import { Gender, User } from '../../../generated/client';
 import { prisma } from '../../database';
 import { onBoardingDto } from './dto/OnBoardingDto';
+
+export interface DetailsInfo{
+  name: string,
+  birthday: Date,
+  gender: Gender,
+  height: number,
+  weight: number,
+  bodyType: string
+}
 
 export class OnBoardingService {
   async updateOnBoarding(userId: string, onBoardingData: onBoardingDto): Promise<User> {
@@ -61,6 +70,48 @@ export class OnBoardingService {
 
     return updatedUser;
   }
+
+  async getDetailsInfo(userId: string) {
+    const userDetails = await prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        bodyType: true,
+        accessories: true,
+        fashionStyles: true,
+      },
+    });
+  
+    if (!userDetails) return null;
+  
+    return {
+      id: userDetails.id,
+      name: userDetails.name,
+      email: userDetails.email,
+      height: userDetails.height,
+      weight: userDetails.weight,
+      birthday: userDetails.birthday,
+      gender: userDetails.gender,
+      color: userDetails.color,
+      bodyType: userDetails.bodyType
+        ? {
+            id: userDetails.bodyType.id,
+            name: userDetails.bodyType.name,
+            description: userDetails.bodyType.description,
+          }
+        : null,
+      accessories: userDetails.accessories.map(acc => ({
+        id: acc.id,
+        name: acc.name,
+        description: acc.description,
+      })),
+      fashionStyles: userDetails.fashionStyles.map(fs => ({
+        id: fs.id,
+        name: fs.name,
+        description: fs.description,
+      })),
+    };
+  }
+  
 }
 
 export const onBoardingService = new OnBoardingService();

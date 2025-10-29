@@ -27,7 +27,7 @@ export const auth = betterAuth({
 
   socialProviders: {
     google: {
-      // enabled: true,
+      enabled: true,
       // prompt: "select_account",
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
@@ -39,6 +39,7 @@ export const auth = betterAuth({
     //   redirectURI: `${process.env.BETTER_AUTH_URL || "http://localhost:3000"}/api/auth/callback/facebook`,
     // },
   },
+  trustedOrigins: ["http://localhost:5174"]
 });
 
 console.log('🔐 Better Auth Configuration:');
@@ -46,5 +47,3 @@ console.log('   baseURL:', process.env.BETTER_AUTH_URL || 'http://localhost:3000
 console.log('   Google Client ID:', process.env.GOOGLE_CLIENT_ID ? '✅ Set' : '❌ Not Set');
 console.log('   Google Client Secret:', process.env.GOOGLE_CLIENT_SECRET ? '✅ Set' : '❌ Not Set');
 console.log('   Resend', process.env.RESEND_API_KEY ? '✅ Set' : '❌ Not Set');
-
-

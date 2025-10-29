@@ -12,11 +12,7 @@ const router = Router();
 // // router.all('/*', toNodeHandler(auth));
 // router.use(betterAuthHandler);
 
-router.put(
-  '/onboarding',
-  authMiddleware,
-  validateOnBoarding,
-  onBoardingController.updateOnBoarding
-);
+router.put( '/onboarding', authMiddleware, validateOnBoarding, onBoardingController.updateOnBoarding );
+router.get('/user-details/:userId',authMiddleware, onBoardingController.getDetailsInfoById)
 
 export default router;

@@ -26,6 +26,32 @@ export class OnBoardingController {
       return res.status(500).json({ message: 'Failed to update onboarding' });
     }
   }
+
+  async getDetailsInfoById(req:Request,res:Response){
+    try {
+      const userId = (req as any).user?.id
+      console.log(userId);
+
+      if (!userId) {
+        return res.status(401).json({ message: 'User not authenticated' });
+      }
+
+      const user = await onBoardingService.getDetailsInfo(userId)
+
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      return res.status(200).json({
+        message: 'User details fetched successfully',
+        user,
+      });
+      
+    } catch (error) {
+      console.error('Onboarding get error:', error);
+      return res.status(500).json({ message: 'Failed to get onboarding' });
+    }
+  }
 }
 
 export const onBoardingController = new OnBoardingController();
