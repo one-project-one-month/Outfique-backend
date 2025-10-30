@@ -230,11 +230,6 @@ Retrieve onboarding information for a specific user.
 
 **Endpoint:** `GET /api/v1/onboarding/user-details/:userId`
 
-**Headers:**
-```
-Authorization: Bearer <better-auth-token>
-```
-
 **Request Parameters:**
 - `userId` (path parameter): The unique identifier of the user
 
@@ -275,12 +270,3 @@ Authorization: Bearer <better-auth-token>
 ```
 
 ---
-
-## Authentication
-
-All protected endpoints require authentication using the Better Auth token:
-```
-Authorization: Bearer <token>
-```
-
-The token is obtained from the sign-in response and should be included in the Authorization header for protected routes.
