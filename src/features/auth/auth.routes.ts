@@ -7,7 +7,6 @@ import { onBoardingController } from './onBoarding.controller';
 
 const router = Router();
 
-
 router.put(
   '/onboarding',
   authMiddleware,
@@ -16,6 +15,4 @@ router.put(
 );
 router.get('/user-details/:userId', authMiddleware, onBoardingController.getDetailsInfoById);
 
-
 export const authRoute = router;
-

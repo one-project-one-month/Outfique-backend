@@ -14,16 +14,13 @@ import { auth } from './features/auth/auth';
 
 const app = express();
 
-app.use(
-  helmet()
-);
+app.use(helmet());
 
 app.use(
   cors({
     origin: 'http://localhost:5174', // your frontend URL
     credentials: true,
   })
-
 );
 
 app.use(express.json());
@@ -47,8 +44,6 @@ app.use((req, res, next) => {
 
   next();
 });
-
-
 
 app.all('/api/auth/{*any}', toNodeHandler(auth));
 
