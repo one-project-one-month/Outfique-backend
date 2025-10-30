@@ -9,12 +9,19 @@ import { logger } from './utils/logger';
 
 import { errorHandler } from './middleware/error-handler';
 import routes from './routes';
+import { toNodeHandler } from 'better-auth/node';
+import { auth } from './features/auth/auth';
 
 const app = express();
 
 app.use(helmet());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:5174', // your frontend URL
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
@@ -37,6 +44,12 @@ app.use((req, res, next) => {
 
   next();
 });
+
+app.all('/api/auth/{*any}', toNodeHandler(auth));
+
+// Find better-auth routes
+// console.log('Better Auth routes mounted at: /api/auth/*');
+// console.log('Available providers:', Object.keys(auth.options.socialProviders || {}));
 
 app.use(`/api/${API_VERSION}`, routes);
 
