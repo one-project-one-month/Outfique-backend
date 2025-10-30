@@ -1,12 +1,14 @@
-import { Router } from 'express';
-import { userRoutes } from './features/user/user.routes';
+import { NextFunction, Request, Response, Router } from 'express';
+// import { userRoutes } from './features/user/user.routes';
 import healthRoutes from './health';
-import { authRoute } from './features/auth/auth.routes';
+import { savedOutfitRoutes } from './features/saved-outfits/savedOutfit.routes';
+import { testRoutes } from './testingRoutes/testRoutes';
 
 const routes = Router();
 
-routes.use('/', healthRoutes);
-routes.use('/users', userRoutes);
-routes.use('/auth', authRoute);
+routes.use('/test', testRoutes);
 
+routes.use('/', healthRoutes);
+// routes.use('/users', userRoutes);
+routes.use('/saved-outfits', savedOutfitRoutes);
 export default routes;
