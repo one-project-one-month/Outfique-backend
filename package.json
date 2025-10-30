@@ -15,6 +15,8 @@
     "start": "node dist/server.js",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
+    "mastra:dev": "mastra dev --dir src/mastra",
+    "mastra:build": "mastra build",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "commit": "cz-customizable",
@@ -31,7 +33,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mastra/core": "^0.20.0",
+    "@mastra/core": "^0.23.3",
     "@mastra/libsql": "^0.15.1",
     "@openrouter/ai-sdk-provider": "^1.2.0",
     "axios": "^1.12.2",
@@ -46,14 +48,13 @@
     "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mastra": "^0.14.1",
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
     "openai": "^5.22.1",
     "pino": "^9.11.0",
     "uuid": "^13.0.0",
     "winston": "^3.17.0",
-    "zod": "^3.25.76"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
@@ -75,6 +76,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^9.1.7",
+    "mastra": "^0.17.7",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "prisma": "^6.14.0",

@@ -2,14 +2,15 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "typeRoots": ["./src/types", "./node_modules/@types"],
-    "target": "ES6",
-    "module": "CommonJS",
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "target": "ES2022",
+    "module": "nodenext",
+    "outDir": "dist",
+    "noEmit": true,
     "strict": true,
+    "moduleResolution": "nodenext",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*", "src/types/**/*"],
-  "exclude": ["node_modules", "dist", ".mastra"]
+  "exclude": ["node_modules", "dist"]
 }
