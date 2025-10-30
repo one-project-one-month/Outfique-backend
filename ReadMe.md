@@ -1,198 +1,286 @@
-Create auth folder in feature to handle authentication. Authentication is handled by better-auth.ts. There is a controller file and a service file for onboarding data.
+# Authentication & Onboarding API Documentation
 
-Handle auth routes in app.ts using better-auth.ts built in. Onboarding routes are handled in auth/route.ts.
+Base URL: `http://localhost:3000`
 
-#Base URL: http://localhost:3000
+## Overview
 
-##Auth routes
+Authentication is handled by **better-auth.ts**. The application uses a feature-based folder structure with separate controller and service files for onboarding data.
 
-###Sign Up
-Endpoint: /api/auth/sign-up/email
-Method: POST
-Req:
-{
-"name": string,
-"email": string,
-"password": string
-}
+### Project Structure
+```
+features/
+└── auth/
+├── onboarding/
+    
+```
 
-Res:
-{
-"token": null,
-"user": {
-"id": string,
-"email": string,
-"name": email,
-"emailVerified": boolean,
-"createdAt": Date,
-"updatedAt": Date
-}
-}
+- **Auth routes** are handled in `app.ts` using better-auth.ts built-in functionality
+- **Onboarding routes** are handled in `auth/routes.ts`
 
-###Sign In
-Endpoint: /api/auth/sign-in/email
-Method: POST
-Req:
-{
-"email": string,
-"password": string
-}
-Res:
-{
-"redirect": false,
-"token": token,
-"user": {
-"id": string",
-"email": string,
-"name": string,
-"emailVerified": boolean,
-"createdAt": Date,
-"updatedAt": Date
-}
-}
+---
 
-###Sign Out
-Endpoint: /api/auth/sign-out
-Method: POST
-Req:
-Res:
-{
-"success": boolean
-}
+## Authentication Routes
 
-Social Sign In(google only)
-Endpoint: /api/auth/sign-in/social
-Method: POST
-Req:
-{
-"provider": "google",
-"callbackURL": url
-}
-Res:
-{
-"url": url,
-"redirect": boolean
-}
+### Sign Up
 
-##Onboarding Routes
+Create a new user account with email and password.
 
-###Add & Update Onboarding
-Endpoint: api/v1/onboarding
-Method: PUT
-Req:
-{
-"name": string,
-"birthday": "1999-05-10",
-"height": Int(cm),
-"weight": Int(kg),
-"gender": string,
-"color": [string], can be added more
+**Endpoint:** `POST /api/auth/sign-up/email`
 
-"bodyType": { "name": string, "description": string }, only one body type per an account
+**Request Body:**
+```json
+{
+  "name": "string",
+  "email": "string",
+  "password": "string"
+}
+```
 
-"accessories": [
-{ "name": string, "description": string },
-can be added more
-],
-"fashionStyles": [
-{ "name": string, "description": string },
-can be added more
-]
-}
-Res:
+**Response:**
+```json
 {
-"message": "Onboarding updated successfully",
-"user": {
-"id": string,
-"name": string,
-"email": string,
-"emailVerified": boolean,
-"createdAt": Date,
-"updatedAt": Date,
-"height": Int,
-"weight": Int,
-"birthday": "1999-05-10T00:00:00.000Z",
-"gender": string,
-"color": [
-string
-],
-"isActive": boolean,
-"onboardingCompleted": boolean,
-"privacyLevel": "standard",
-"timezone": "Asia/Bangkok", string
-"bodyType": {
-"id": string",
-"userId": string,
-"name": string,
-"description": string,
-"createdAt": Date,
-"updatedAt": Date
-},
-"accessories": [
-{
-"id": string,
-"userId": string,
-"name": string,
-"description": string,
-"createdAt": Date,
-"updatedAt": Date
-},
-],
-"fashionStyles": [
-{
-"id": string,
-"userId": string,
-"name": string,
-"description": string,
-"createdAt": Date,
-"updatedAt": Date
-},
-]
+  "token": null,
+  "user": {
+    "id": "string",
+    "email": "string",
+    "name": "string",
+    "emailVerified": false,
+    "createdAt": "Date",
+    "updatedAt": "Date"
+  }
 }
-}
+```
 
-###Get onboarding by user Id
-Endpoint: api/v1/onBoarding/user-details/:userId
-Method: Get
-Req:
-Authorization: Better Auth <better auth token>
-Res:
+---
+
+### Sign In
+
+Authenticate an existing user with email and password.
+
+**Endpoint:** `POST /api/auth/sign-in/email`
+
+**Request Body:**
+```json
 {
-"message": "User details fetched successfully",
-"user": {
-"id": string",
-"name": string,
-"email": string,
-"height": int,
-"weight": int,
-"birthday": "1999-05-10T00:00:00.000Z",
-"gender": string,
-"color": [
-string
-],
-"bodyType": {
-"id": string,
-"name": string,
-"description": string
-},
-"accessories": [
-{
-"id": string,
-"name": string,
-"description": string
-},
-],
-"fashionStyles": [
-{
-"id": string,
-"name": string,
-"description": string
-},
-{
-"id": string,
-"name": string,
-"description": string
+  "email": "string",
+  "password": "string"
 }
-]
+```
+
+**Response:**
+```json
+{
+  "redirect": false,
+  "token": "string",
+  "user": {
+    "id": "string",
+    "email": "string",
+    "name": "string",
+    "emailVerified": false,
+    "createdAt": "Date",
+    "updatedAt": "Date"
+  }
 }
+```
+
+---
+
+### Sign Out
+
+End the current user session.
+
+**Endpoint:** `POST /api/auth/sign-out`
+
+**Request Body:** None
+
+**Response:**
+```json
+{
+  "success": true
 }
+```
+
+---
+
+### Social Sign In (Google)
+
+Initiate OAuth authentication with Google.
+
+**Endpoint:** `POST /api/auth/sign-in/social`
+
+**Request Body:**
+```json
+{
+  "provider": "google",
+  "callbackURL": "string"
+}
+```
+
+**Response:**
+```json
+{
+  "url": "string",
+  "redirect": true
+}
+```
+
+---
+
+## Onboarding Routes
+
+### Add & Update Onboarding
+
+Create or update user onboarding information including personal details, fashion preferences, and style choices.
+
+**Endpoint:** `PUT /api/v1/onboarding`
+
+**Request Body:**
+```json
+{
+  "name": "string",
+  "birthday": "1999-05-10",
+  "height": int,
+  "weight": int,
+  "gender": "string",
+  "color": ["string"],
+  "bodyType": {
+    "name": "string",
+    "description": "string"
+  },
+  "accessories": [
+    {
+      "name": "string",
+      "description": "string"
+    }
+  ],
+  "fashionStyles": [
+    {
+      "name": "string",
+      "description": "string"
+    }
+  ]
+}
+```
+
+**Notes:**
+- `height` is in centimeters (cm)
+- `weight` is in kilograms (kg)
+- `color` can contain multiple strings
+- `bodyType` only one body type per account
+- `accessories` can contain multiple items
+- `fashionStyles` can contain multiple styles
+
+**Response:**
+```json
+{
+  "message": "Onboarding updated successfully",
+  "user": {
+    "id": "string",
+    "name": "string",
+    "email": "string",
+    "emailVerified": false,
+    "createdAt": "Date",
+    "updatedAt": "Date",
+    "height": int,
+    "weight": int,
+    "birthday": "1999-05-10T00:00:00.000Z",
+    "gender": "string",
+    "color": ["string"],
+    "isActive": true,
+    "onboardingCompleted": true,
+    "privacyLevel": "standard",
+    "timezone": "Asia/Bangkok",
+    "bodyType": {
+      "id": "string",
+      "userId": "string",
+      "name": "string",
+      "description": "string",
+      "createdAt": "Date",
+      "updatedAt": "Date"
+    },
+    "accessories": [
+      {
+        "id": "string",
+        "userId": "string",
+        "name": "string",
+        "description": "string",
+        "createdAt": "Date",
+        "updatedAt": "Date"
+      }
+    ],
+    "fashionStyles": [
+      {
+        "id": "string",
+        "userId": "string",
+        "name": "string",
+        "description": "string",
+        "createdAt": "Date",
+        "updatedAt": "Date"
+      }
+    ]
+  }
+}
+```
+
+---
+
+### Get Onboarding by User ID
+
+Retrieve onboarding information for a specific user.
+
+**Endpoint:** `GET /api/v1/onboarding/user-details/:userId`
+
+**Headers:**
+```
+Authorization: Bearer <better-auth-token>
+```
+
+**Request Parameters:**
+- `userId` (path parameter): The unique identifier of the user
+
+**Response:**
+```json
+{
+  "message": "User details fetched successfully",
+  "user": {
+    "id": "string",
+    "name": "string",
+    "email": "string",
+    "height": int,
+    "weight": int,
+    "birthday": "1999-05-10T00:00:00.000Z",
+    "gender": "string",
+    "color": ["string"],
+    "bodyType": {
+      "id": "string",
+      "name": "string",
+      "description": "string"
+    },
+    "accessories": [
+      {
+        "id": "string",
+        "name": "string",
+        "description": "string"
+      }
+    ],
+    "fashionStyles": [
+      {
+        "id": "string",
+        "name": "string",
+        "description": "string"
+      }
+    ]
+  }
+}
+```
+
+---
+
+## Authentication
+
+All protected endpoints require authentication using the Better Auth token:
+```
+Authorization: Bearer <token>
+```
+
+The token is obtained from the sign-in response and should be included in the Authorization header for protected routes.
