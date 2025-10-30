@@ -148,5 +148,63 @@ export const generateOutfitTool = createTool({
       outfits,
       personalizedMessage: `Hi ${name}! I've created these personalized outfit recommendations based on your ${bodyType} body type and ${fashionStyles.join(', ')} style preferences. Each look incorporates your favorite colors (${colors.join(', ')}) and accessories. These outfits will make you feel confident and stylish!`,
     };
+
+    //      const prompt = `
+    //         You are a professional fashion stylist AI.
+    //         Generate 3 outfit recommendations for the following user:
+
+    //         Name: ${name}
+    //         Body Type: ${bodyType}
+    //         Accessories: ${accessories.join(', ')}
+    //         Colors: ${colors.join(', ')}
+    //         Styles: ${fashionStyles.join(', ')}
+    //         Occasion: ${occasion}
+    //         Season: ${season}
+
+    //         For each outfit, provide structured JSON output that includes:
+    //         - name
+    //         - occasion
+    //         - items (top, bottom, footwear, accessories, optional outerLayer)
+    //         - stylingTips (array of strings)
+    //         - bodyTypeNotes
+    //         Make sure all colors and items match the user's preferences and are body-type appropriate.
+    //         Return ONLY JSON, no explanation.
+    //     `;
+
+    //      const result = await callModel('google/gemini-2.0-flash-exp', {
+    //        input: prompt,
+    //        outputFormat: 'json',
+    //      });
+
+    //      // Parse model output safely
+    //      let parsedOutfits;
+    //      try {
+    //        parsedOutfits = JSON.parse(result.output_text);
+    //      } catch (err) {
+    //        console.error('Failed to parse AI output:', err);
+    //        parsedOutfits = [];
+    //      }
+
+    //      // Optional: call image generation for each outfit
+    //      const outfitsWithImages = await Promise.all(
+    //        parsedOutfits.outfits.map(async (outfit: any) => {
+    //          const imagePrompt = `
+    // High-quality outfit flat lay for:
+    // ${outfit.name}. Include: ${outfit.items.top.item}, ${outfit.items.bottom.item}, ${outfit.items.footwear.item}, ${outfit.accessories.join(', ')}.
+    // Style: ${fashionStyles.join(', ')}, ${colors.join(', ')}, ${bodyType} body type, ${occasion}, ${season}.
+    // Photography style: professional studio, white background, modern.
+    //         `.trim();
+
+    //          const imageGen = await callModel('openai/gpt-image-1', {
+    //            input: imagePrompt,
+    //            imageSize: '1024x1024',
+    //          });
+
+    //          return {
+    //            ...outfit,
+    //            imageUrl: imageGen.output_image_url,
+    //          };
+    //        })
+    //      );
   },
 });
