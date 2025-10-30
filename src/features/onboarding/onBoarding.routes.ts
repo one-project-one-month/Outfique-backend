@@ -5,12 +5,7 @@ import { validateOnBoarding } from './middleware/onBoarding.validation';
 
 const router = Router();
 
-router.put(
-  '/',
-  authMiddleware,
-  validateOnBoarding,
-  onBoardingController.updateOnBoarding
-);
+router.put('/', authMiddleware, validateOnBoarding, onBoardingController.updateOnBoarding);
 router.get('/user-details/:userId', authMiddleware, onBoardingController.getDetailsInfoById);
 
 export const onBoardingRoute = router;
