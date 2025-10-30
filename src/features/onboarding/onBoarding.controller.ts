@@ -31,21 +31,21 @@ export class OnBoardingController {
     try {
       const loggedInUser = (req as any).user;
       const requestedUserId = req.params.userId;
-  
-      if (!loggedInUser) { 
+
+      if (!loggedInUser) {
         return res.status(401).json({ message: 'User not authenticated' });
       }
-  
+
       if (loggedInUser.id !== requestedUserId) {
-        return res.status(403).json({ message: 'Unauthorized access to another user\'s data' });
+        return res.status(403).json({ message: "Unauthorized access to another user's data" });
       }
-  
+
       const user = await onBoardingService.getDetailsInfo(requestedUserId);
-  
+
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
-  
+
       return res.status(200).json({
         message: 'User details fetched successfully',
         user,
@@ -55,8 +55,6 @@ export class OnBoardingController {
       return res.status(500).json({ message: 'Failed to get onboarding' });
     }
   }
-  
-  
 }
 
 export const onBoardingController = new OnBoardingController();
