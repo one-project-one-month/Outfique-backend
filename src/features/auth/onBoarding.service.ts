@@ -2,15 +2,6 @@ import { Gender, User } from '../../../generated/client';
 import { prisma } from '../../database';
 import { onBoardingDto } from './dto/OnBoardingDto';
 
-export interface DetailsInfo{
-  name: string,
-  birthday: Date,
-  gender: Gender,
-  height: number,
-  weight: number,
-  bodyType: string
-}
-
 export class OnBoardingService {
   async updateOnBoarding(userId: string, onBoardingData: onBoardingDto): Promise<User> {
     const updatedUser = await prisma.$transaction(async (tx) => {
@@ -80,9 +71,9 @@ export class OnBoardingService {
         fashionStyles: true,
       },
     });
-  
+
     if (!userDetails) return null;
-  
+
     return {
       id: userDetails.id,
       name: userDetails.name,
@@ -99,19 +90,18 @@ export class OnBoardingService {
             description: userDetails.bodyType.description,
           }
         : null,
-      accessories: userDetails.accessories.map(acc => ({
+      accessories: userDetails.accessories.map((acc) => ({
         id: acc.id,
         name: acc.name,
         description: acc.description,
       })),
-      fashionStyles: userDetails.fashionStyles.map(fs => ({
+      fashionStyles: userDetails.fashionStyles.map((fs) => ({
         id: fs.id,
         name: fs.name,
         description: fs.description,
       })),
     };
   }
-  
 }
 
 export const onBoardingService = new OnBoardingService();

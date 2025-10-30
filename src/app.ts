@@ -16,31 +16,14 @@ const app = express();
 
 app.use(
   helmet()
-  //   {
-  //   contentSecurityPolicy: {
-  //     directives: {
-  //       defaultSrc: ["'self'"],
-  //       scriptSrc: ["'self'", "'unsafe-inline'", "https://esm.sh"],
-  //       scriptSrcAttr: ["'unsafe-inline'"], // <-- allow onclick, onmouseover, etc.
-  //       styleSrc: ["'self'", "'unsafe-inline'"],
-  //       connectSrc: ["'self'", "*"], // allow all external connections for dev
-  //     },
-  //   },
-  // }
 );
 
 app.use(
   cors({
-    origin: "http://localhost:5174", // your frontend URL
+    origin: 'http://localhost:5174', // your frontend URL
     credentials: true,
   })
-  
-  //   {
-  //   origin: 'http://localhost:3000', // your frontend origin
-  //   credentials: true,               // allow cookies
-  //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  //   allowedHeaders: ['Content-Type', 'Authorization'],
-  // }
+
 );
 
 app.use(express.json());
@@ -65,17 +48,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// import path from 'path';
 
-// app.get('/test-signin', (req, res) => {
-//   res.sendFile(path.join(process.cwd(), 'index.html'));
-// });
 
 app.all('/api/auth/{*any}', toNodeHandler(auth));
 
-// After mounting auth
-console.log('Better Auth routes mounted at: /api/auth/*');
-console.log('Available providers:', Object.keys(auth.options.socialProviders || {}));
+// Find better-auth routes
+// console.log('Better Auth routes mounted at: /api/auth/*');
+// console.log('Available providers:', Object.keys(auth.options.socialProviders || {}));
 
 app.use(`/api/${API_VERSION}`, routes);
 

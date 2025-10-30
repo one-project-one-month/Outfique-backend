@@ -39,7 +39,7 @@ export const auth = betterAuth({
     //   redirectURI: `${process.env.BETTER_AUTH_URL || "http://localhost:3000"}/api/auth/callback/facebook`,
     // },
   },
-  trustedOrigins: ["http://localhost:5174"]
+  trustedOrigins: ['http://localhost:5174'],
 });
 
 console.log('🔐 Better Auth Configuration:');

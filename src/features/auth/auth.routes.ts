@@ -7,12 +7,15 @@ import { onBoardingController } from './onBoarding.controller';
 
 const router = Router();
 
-// const betterAuthHandler = toNodeHandler(auth);
 
-// // router.all('/*', toNodeHandler(auth));
-// router.use(betterAuthHandler);
+router.put(
+  '/onboarding',
+  authMiddleware,
+  validateOnBoarding,
+  onBoardingController.updateOnBoarding
+);
+router.get('/user-details/:userId', authMiddleware, onBoardingController.getDetailsInfoById);
 
-router.put( '/onboarding', authMiddleware, validateOnBoarding, onBoardingController.updateOnBoarding );
-router.get('/user-details/:userId',authMiddleware, onBoardingController.getDetailsInfoById)
 
-export default router;
+export const authRoute = router;
+
