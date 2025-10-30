@@ -3,6 +3,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 import healthRoutes from './health';
 import { savedOutfitRoutes } from './features/saved-outfits/savedOutfit.routes';
 import { testRoutes } from './testingRoutes/testRoutes';
+import { AIRouter } from './features/ai /ai.routes';
 
 const routes = Router();
 
@@ -11,4 +12,6 @@ routes.use('/test', testRoutes);
 routes.use('/', healthRoutes);
 // routes.use('/users', userRoutes);
 routes.use('/saved-outfits', savedOutfitRoutes);
+
+routes.use('/ai', AIRouter);
 export default routes;

@@ -1,8 +1,9 @@
 import { Mastra } from '@mastra/core/mastra';
-import { outfiqueAgent } from './agents/outfique-agent';
+import { weatherAgent } from './agents/weather-agent';
+import { outfiqueAgent } from './agents/outfit-recomment-agent';
 
 const mastra = new Mastra({
-  agents: { outfiqueAgent },
+  agents: { weatherAgent, outfiqueAgent },
 });
 
 export { mastra };

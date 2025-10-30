@@ -16,4 +16,5 @@ router
   .get(getSavedOutfits)
   .delete(removeOutfit)
   .patch(updateSavedOutfitValidation, handleValidationErrors, updateSavedOutfit);
+
 export const savedOutfitRoutes = router;
