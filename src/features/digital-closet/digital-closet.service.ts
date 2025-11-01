@@ -2,6 +2,7 @@ import { OutfitInDigitalCloset } from '../../../generated/client';
 import { prisma } from '../../database';
 import { addToClosetDto, updateClosetOutfitDto } from './dto/digital-closet-Dto';
 
+/////////Need to Add Validation for user Availability
 export class DigitalClosetService {
   async addOutfit(outfitData: addToClosetDto): Promise<any> {
     const addedOutfit = await prisma.outfitInDigitalCloset.create({

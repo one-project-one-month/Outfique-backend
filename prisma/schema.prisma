@@ -88,7 +88,7 @@ model User {
   accounts       Account[]
   preferences    UserPreference?
   favourites     UserFavourite[]
-  digitalClosets OutfitInDigitalCloset[]
+  // digitalClosets OutfitInDigitalCloset[]
 
   @@index([email])
   @@index([isActive])
@@ -254,6 +254,6 @@ model OutfitInDigitalCloset {
   isFavorite     Boolean        @default(false)
   addedAt        DateTime       @default(now())
   // Relations
-  user           User           @relation(fields: [userId], references: [id])
+  // user           User           @relation(fields: [userId], references: [id])
  
 }

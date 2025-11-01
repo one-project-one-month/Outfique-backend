@@ -1964,13 +1964,11 @@ export namespace Prisma {
   export type UserCountOutputType = {
     accounts: number
     favourites: number
-    digitalClosets: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     favourites?: boolean | UserCountOutputTypeCountFavouritesArgs
-    digitalClosets?: boolean | UserCountOutputTypeCountDigitalClosetsArgs
   }
 
   // Custom InputTypes
@@ -1996,13 +1994,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountFavouritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserFavouriteWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountDigitalClosetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OutfitInDigitalClosetWhereInput
   }
 
 
@@ -2419,7 +2410,6 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     preferences?: boolean | User$preferencesArgs<ExtArgs>
     favourites?: boolean | User$favouritesArgs<ExtArgs>
-    digitalClosets?: boolean | User$digitalClosetsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2482,7 +2472,6 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     preferences?: boolean | User$preferencesArgs<ExtArgs>
     favourites?: boolean | User$favouritesArgs<ExtArgs>
-    digitalClosets?: boolean | User$digitalClosetsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2494,7 +2483,6 @@ export namespace Prisma {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       preferences: Prisma.$UserPreferencePayload<ExtArgs> | null
       favourites: Prisma.$UserFavouritePayload<ExtArgs>[]
-      digitalClosets: Prisma.$OutfitInDigitalClosetPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2909,7 +2897,6 @@ export namespace Prisma {
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     preferences<T extends User$preferencesArgs<ExtArgs> = {}>(args?: Subset<T, User$preferencesArgs<ExtArgs>>): Prisma__UserPreferenceClient<$Result.GetResult<Prisma.$UserPreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     favourites<T extends User$favouritesArgs<ExtArgs> = {}>(args?: Subset<T, User$favouritesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFavouritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    digitalClosets<T extends User$digitalClosetsArgs<ExtArgs> = {}>(args?: Subset<T, User$digitalClosetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutfitInDigitalClosetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3406,30 +3393,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserFavouriteScalarFieldEnum | UserFavouriteScalarFieldEnum[]
-  }
-
-  /**
-   * User.digitalClosets
-   */
-  export type User$digitalClosetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutfitInDigitalCloset
-     */
-    select?: OutfitInDigitalClosetSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OutfitInDigitalCloset
-     */
-    omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
-    where?: OutfitInDigitalClosetWhereInput
-    orderBy?: OutfitInDigitalClosetOrderByWithRelationInput | OutfitInDigitalClosetOrderByWithRelationInput[]
-    cursor?: OutfitInDigitalClosetWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OutfitInDigitalClosetScalarFieldEnum | OutfitInDigitalClosetScalarFieldEnum[]
   }
 
   /**
@@ -14868,7 +14831,6 @@ export namespace Prisma {
     brand?: boolean
     isFavorite?: boolean
     addedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["outfitInDigitalCloset"]>
 
   export type OutfitInDigitalClosetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -14884,7 +14846,6 @@ export namespace Prisma {
     brand?: boolean
     isFavorite?: boolean
     addedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["outfitInDigitalCloset"]>
 
   export type OutfitInDigitalClosetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -14900,7 +14861,6 @@ export namespace Prisma {
     brand?: boolean
     isFavorite?: boolean
     addedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["outfitInDigitalCloset"]>
 
   export type OutfitInDigitalClosetSelectScalar = {
@@ -14919,21 +14879,10 @@ export namespace Prisma {
   }
 
   export type OutfitInDigitalClosetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "image_url" | "image_publicId" | "categories" | "colors" | "fashionStyles" | "size" | "weatherConds" | "brand" | "isFavorite" | "addedAt", ExtArgs["result"]["outfitInDigitalCloset"]>
-  export type OutfitInDigitalClosetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type OutfitInDigitalClosetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type OutfitInDigitalClosetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
 
   export type $OutfitInDigitalClosetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OutfitInDigitalCloset"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
@@ -15341,7 +15290,6 @@ export namespace Prisma {
    */
   export interface Prisma__OutfitInDigitalClosetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15400,10 +15348,6 @@ export namespace Prisma {
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
-    /**
      * Filter, which OutfitInDigitalCloset to fetch.
      */
     where: OutfitInDigitalClosetWhereUniqueInput
@@ -15422,10 +15366,6 @@ export namespace Prisma {
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
-    /**
      * Filter, which OutfitInDigitalCloset to fetch.
      */
     where: OutfitInDigitalClosetWhereUniqueInput
@@ -15443,10 +15383,6 @@ export namespace Prisma {
      * Omit specific fields from the OutfitInDigitalCloset
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
     /**
      * Filter, which OutfitInDigitalCloset to fetch.
      */
@@ -15496,10 +15432,6 @@ export namespace Prisma {
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
-    /**
      * Filter, which OutfitInDigitalCloset to fetch.
      */
     where?: OutfitInDigitalClosetWhereInput
@@ -15548,10 +15480,6 @@ export namespace Prisma {
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
-    /**
      * Filter, which OutfitInDigitalClosets to fetch.
      */
     where?: OutfitInDigitalClosetWhereInput
@@ -15595,10 +15523,6 @@ export namespace Prisma {
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
-    /**
      * The data needed to create a OutfitInDigitalCloset.
      */
     data: XOR<OutfitInDigitalClosetCreateInput, OutfitInDigitalClosetUncheckedCreateInput>
@@ -15632,10 +15556,6 @@ export namespace Prisma {
      */
     data: OutfitInDigitalClosetCreateManyInput | OutfitInDigitalClosetCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -15650,10 +15570,6 @@ export namespace Prisma {
      * Omit specific fields from the OutfitInDigitalCloset
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
     /**
      * The data needed to update a OutfitInDigitalCloset.
      */
@@ -15706,10 +15622,6 @@ export namespace Prisma {
      * Limit how many OutfitInDigitalClosets to update.
      */
     limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -15724,10 +15636,6 @@ export namespace Prisma {
      * Omit specific fields from the OutfitInDigitalCloset
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
     /**
      * The filter to search for the OutfitInDigitalCloset to update in case it exists.
      */
@@ -15754,10 +15662,6 @@ export namespace Prisma {
      * Omit specific fields from the OutfitInDigitalCloset
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
     /**
      * Filter which OutfitInDigitalCloset to delete.
      */
@@ -15790,10 +15694,6 @@ export namespace Prisma {
      * Omit specific fields from the OutfitInDigitalCloset
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
   }
 
 
@@ -16205,7 +16105,6 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     preferences?: XOR<UserPreferenceNullableScalarRelationFilter, UserPreferenceWhereInput> | null
     favourites?: UserFavouriteListRelationFilter
-    digitalClosets?: OutfitInDigitalClosetListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -16227,7 +16126,6 @@ export namespace Prisma {
     accounts?: AccountOrderByRelationAggregateInput
     preferences?: UserPreferenceOrderByWithRelationInput
     favourites?: UserFavouriteOrderByRelationAggregateInput
-    digitalClosets?: OutfitInDigitalClosetOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -16252,7 +16150,6 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     preferences?: XOR<UserPreferenceNullableScalarRelationFilter, UserPreferenceWhereInput> | null
     favourites?: UserFavouriteListRelationFilter
-    digitalClosets?: OutfitInDigitalClosetListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -17037,7 +16934,6 @@ export namespace Prisma {
     brand?: StringNullableListFilter<"OutfitInDigitalCloset">
     isFavorite?: BoolFilter<"OutfitInDigitalCloset"> | boolean
     addedAt?: DateTimeFilter<"OutfitInDigitalCloset"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type OutfitInDigitalClosetOrderByWithRelationInput = {
@@ -17053,7 +16949,6 @@ export namespace Prisma {
     brand?: SortOrder
     isFavorite?: SortOrder
     addedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
   }
 
   export type OutfitInDigitalClosetWhereUniqueInput = Prisma.AtLeast<{
@@ -17072,7 +16967,6 @@ export namespace Prisma {
     brand?: StringNullableListFilter<"OutfitInDigitalCloset">
     isFavorite?: BoolFilter<"OutfitInDigitalCloset"> | boolean
     addedAt?: DateTimeFilter<"OutfitInDigitalCloset"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type OutfitInDigitalClosetOrderByWithAggregationInput = {
@@ -17130,7 +17024,6 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     preferences?: UserPreferenceCreateNestedOneWithoutUserInput
     favourites?: UserFavouriteCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -17152,7 +17045,6 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     preferences?: UserPreferenceUncheckedCreateNestedOneWithoutUserInput
     favourites?: UserFavouriteUncheckedCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -17174,7 +17066,6 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     preferences?: UserPreferenceUpdateOneWithoutUserNestedInput
     favourites?: UserFavouriteUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -17196,7 +17087,6 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     preferences?: UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
     favourites?: UserFavouriteUncheckedUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -18010,6 +17900,7 @@ export namespace Prisma {
 
   export type OutfitInDigitalClosetCreateInput = {
     id?: string
+    userId: string
     image_url: string
     image_publicId: string
     categories?: OutfitInDigitalClosetCreatecategoriesInput | string[]
@@ -18020,7 +17911,6 @@ export namespace Prisma {
     brand?: OutfitInDigitalClosetCreatebrandInput | string[]
     isFavorite?: boolean
     addedAt?: Date | string
-    user: UserCreateNestedOneWithoutDigitalClosetsInput
   }
 
   export type OutfitInDigitalClosetUncheckedCreateInput = {
@@ -18040,6 +17930,7 @@ export namespace Prisma {
 
   export type OutfitInDigitalClosetUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     image_url?: StringFieldUpdateOperationsInput | string
     image_publicId?: StringFieldUpdateOperationsInput | string
     categories?: OutfitInDigitalClosetUpdatecategoriesInput | string[]
@@ -18050,7 +17941,6 @@ export namespace Prisma {
     brand?: OutfitInDigitalClosetUpdatebrandInput | string[]
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
     addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutDigitalClosetsNestedInput
   }
 
   export type OutfitInDigitalClosetUncheckedUpdateInput = {
@@ -18085,6 +17975,7 @@ export namespace Prisma {
 
   export type OutfitInDigitalClosetUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     image_url?: StringFieldUpdateOperationsInput | string
     image_publicId?: StringFieldUpdateOperationsInput | string
     categories?: OutfitInDigitalClosetUpdatecategoriesInput | string[]
@@ -18200,12 +18091,6 @@ export namespace Prisma {
     none?: UserFavouriteWhereInput
   }
 
-  export type OutfitInDigitalClosetListRelationFilter = {
-    every?: OutfitInDigitalClosetWhereInput
-    some?: OutfitInDigitalClosetWhereInput
-    none?: OutfitInDigitalClosetWhereInput
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -18216,10 +18101,6 @@ export namespace Prisma {
   }
 
   export type UserFavouriteOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type OutfitInDigitalClosetOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19073,13 +18954,6 @@ export namespace Prisma {
     connect?: UserFavouriteWhereUniqueInput | UserFavouriteWhereUniqueInput[]
   }
 
-  export type OutfitInDigitalClosetCreateNestedManyWithoutUserInput = {
-    create?: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput> | OutfitInDigitalClosetCreateWithoutUserInput[] | OutfitInDigitalClosetUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OutfitInDigitalClosetCreateOrConnectWithoutUserInput | OutfitInDigitalClosetCreateOrConnectWithoutUserInput[]
-    createMany?: OutfitInDigitalClosetCreateManyUserInputEnvelope
-    connect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-  }
-
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -19098,13 +18972,6 @@ export namespace Prisma {
     connectOrCreate?: UserFavouriteCreateOrConnectWithoutUserInput | UserFavouriteCreateOrConnectWithoutUserInput[]
     createMany?: UserFavouriteCreateManyUserInputEnvelope
     connect?: UserFavouriteWhereUniqueInput | UserFavouriteWhereUniqueInput[]
-  }
-
-  export type OutfitInDigitalClosetUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput> | OutfitInDigitalClosetCreateWithoutUserInput[] | OutfitInDigitalClosetUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OutfitInDigitalClosetCreateOrConnectWithoutUserInput | OutfitInDigitalClosetCreateOrConnectWithoutUserInput[]
-    createMany?: OutfitInDigitalClosetCreateManyUserInputEnvelope
-    connect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -19177,20 +19044,6 @@ export namespace Prisma {
     deleteMany?: UserFavouriteScalarWhereInput | UserFavouriteScalarWhereInput[]
   }
 
-  export type OutfitInDigitalClosetUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput> | OutfitInDigitalClosetCreateWithoutUserInput[] | OutfitInDigitalClosetUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OutfitInDigitalClosetCreateOrConnectWithoutUserInput | OutfitInDigitalClosetCreateOrConnectWithoutUserInput[]
-    upsert?: OutfitInDigitalClosetUpsertWithWhereUniqueWithoutUserInput | OutfitInDigitalClosetUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OutfitInDigitalClosetCreateManyUserInputEnvelope
-    set?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    disconnect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    delete?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    connect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    update?: OutfitInDigitalClosetUpdateWithWhereUniqueWithoutUserInput | OutfitInDigitalClosetUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OutfitInDigitalClosetUpdateManyWithWhereWithoutUserInput | OutfitInDigitalClosetUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OutfitInDigitalClosetScalarWhereInput | OutfitInDigitalClosetScalarWhereInput[]
-  }
-
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -19227,20 +19080,6 @@ export namespace Prisma {
     update?: UserFavouriteUpdateWithWhereUniqueWithoutUserInput | UserFavouriteUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserFavouriteUpdateManyWithWhereWithoutUserInput | UserFavouriteUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserFavouriteScalarWhereInput | UserFavouriteScalarWhereInput[]
-  }
-
-  export type OutfitInDigitalClosetUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput> | OutfitInDigitalClosetCreateWithoutUserInput[] | OutfitInDigitalClosetUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OutfitInDigitalClosetCreateOrConnectWithoutUserInput | OutfitInDigitalClosetCreateOrConnectWithoutUserInput[]
-    upsert?: OutfitInDigitalClosetUpsertWithWhereUniqueWithoutUserInput | OutfitInDigitalClosetUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OutfitInDigitalClosetCreateManyUserInputEnvelope
-    set?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    disconnect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    delete?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    connect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    update?: OutfitInDigitalClosetUpdateWithWhereUniqueWithoutUserInput | OutfitInDigitalClosetUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OutfitInDigitalClosetUpdateManyWithWhereWithoutUserInput | OutfitInDigitalClosetUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OutfitInDigitalClosetScalarWhereInput | OutfitInDigitalClosetScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -19614,12 +19453,6 @@ export namespace Prisma {
     set: string[]
   }
 
-  export type UserCreateNestedOneWithoutDigitalClosetsInput = {
-    create?: XOR<UserCreateWithoutDigitalClosetsInput, UserUncheckedCreateWithoutDigitalClosetsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDigitalClosetsInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type OutfitInDigitalClosetUpdatecategoriesInput = {
     set?: string[]
     push?: string | string[]
@@ -19643,14 +19476,6 @@ export namespace Prisma {
   export type OutfitInDigitalClosetUpdatebrandInput = {
     set?: string[]
     push?: string | string[]
-  }
-
-  export type UserUpdateOneRequiredWithoutDigitalClosetsNestedInput = {
-    create?: XOR<UserCreateWithoutDigitalClosetsInput, UserUncheckedCreateWithoutDigitalClosetsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDigitalClosetsInput
-    upsert?: UserUpsertWithoutDigitalClosetsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDigitalClosetsInput, UserUpdateWithoutDigitalClosetsInput>, UserUncheckedUpdateWithoutDigitalClosetsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -20084,44 +19909,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type OutfitInDigitalClosetCreateWithoutUserInput = {
-    id?: string
-    image_url: string
-    image_publicId: string
-    categories?: OutfitInDigitalClosetCreatecategoriesInput | string[]
-    colors?: OutfitInDigitalClosetCreatecolorsInput | string[]
-    fashionStyles?: OutfitInDigitalClosetCreatefashionStylesInput | string[]
-    size: string
-    weatherConds?: OutfitInDigitalClosetCreateweatherCondsInput | string[]
-    brand?: OutfitInDigitalClosetCreatebrandInput | string[]
-    isFavorite?: boolean
-    addedAt?: Date | string
-  }
-
-  export type OutfitInDigitalClosetUncheckedCreateWithoutUserInput = {
-    id?: string
-    image_url: string
-    image_publicId: string
-    categories?: OutfitInDigitalClosetCreatecategoriesInput | string[]
-    colors?: OutfitInDigitalClosetCreatecolorsInput | string[]
-    fashionStyles?: OutfitInDigitalClosetCreatefashionStylesInput | string[]
-    size: string
-    weatherConds?: OutfitInDigitalClosetCreateweatherCondsInput | string[]
-    brand?: OutfitInDigitalClosetCreatebrandInput | string[]
-    isFavorite?: boolean
-    addedAt?: Date | string
-  }
-
-  export type OutfitInDigitalClosetCreateOrConnectWithoutUserInput = {
-    where: OutfitInDigitalClosetWhereUniqueInput
-    create: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput>
-  }
-
-  export type OutfitInDigitalClosetCreateManyUserInputEnvelope = {
-    data: OutfitInDigitalClosetCreateManyUserInput | OutfitInDigitalClosetCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
     where: AccountWhereUniqueInput
     update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
@@ -20224,40 +20011,6 @@ export namespace Prisma {
     selectedAt?: DateTimeFilter<"UserFavourite"> | Date | string
   }
 
-  export type OutfitInDigitalClosetUpsertWithWhereUniqueWithoutUserInput = {
-    where: OutfitInDigitalClosetWhereUniqueInput
-    update: XOR<OutfitInDigitalClosetUpdateWithoutUserInput, OutfitInDigitalClosetUncheckedUpdateWithoutUserInput>
-    create: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput>
-  }
-
-  export type OutfitInDigitalClosetUpdateWithWhereUniqueWithoutUserInput = {
-    where: OutfitInDigitalClosetWhereUniqueInput
-    data: XOR<OutfitInDigitalClosetUpdateWithoutUserInput, OutfitInDigitalClosetUncheckedUpdateWithoutUserInput>
-  }
-
-  export type OutfitInDigitalClosetUpdateManyWithWhereWithoutUserInput = {
-    where: OutfitInDigitalClosetScalarWhereInput
-    data: XOR<OutfitInDigitalClosetUpdateManyMutationInput, OutfitInDigitalClosetUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type OutfitInDigitalClosetScalarWhereInput = {
-    AND?: OutfitInDigitalClosetScalarWhereInput | OutfitInDigitalClosetScalarWhereInput[]
-    OR?: OutfitInDigitalClosetScalarWhereInput[]
-    NOT?: OutfitInDigitalClosetScalarWhereInput | OutfitInDigitalClosetScalarWhereInput[]
-    id?: StringFilter<"OutfitInDigitalCloset"> | string
-    userId?: StringFilter<"OutfitInDigitalCloset"> | string
-    image_url?: StringFilter<"OutfitInDigitalCloset"> | string
-    image_publicId?: StringFilter<"OutfitInDigitalCloset"> | string
-    categories?: StringNullableListFilter<"OutfitInDigitalCloset">
-    colors?: StringNullableListFilter<"OutfitInDigitalCloset">
-    fashionStyles?: StringNullableListFilter<"OutfitInDigitalCloset">
-    size?: StringFilter<"OutfitInDigitalCloset"> | string
-    weatherConds?: StringNullableListFilter<"OutfitInDigitalCloset">
-    brand?: StringNullableListFilter<"OutfitInDigitalCloset">
-    isFavorite?: BoolFilter<"OutfitInDigitalCloset"> | boolean
-    addedAt?: DateTimeFilter<"OutfitInDigitalCloset"> | Date | string
-  }
-
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name: string
@@ -20276,7 +20029,6 @@ export namespace Prisma {
     timezone?: string
     preferences?: UserPreferenceCreateNestedOneWithoutUserInput
     favourites?: UserFavouriteCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -20297,7 +20049,6 @@ export namespace Prisma {
     timezone?: string
     preferences?: UserPreferenceUncheckedCreateNestedOneWithoutUserInput
     favourites?: UserFavouriteUncheckedCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -20334,7 +20085,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     preferences?: UserPreferenceUpdateOneWithoutUserNestedInput
     favourites?: UserFavouriteUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -20355,7 +20105,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     preferences?: UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
     favourites?: UserFavouriteUncheckedUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserPreferenceCreateWithoutBodyTypeInput = {
@@ -20653,7 +20402,6 @@ export namespace Prisma {
     timezone?: string
     accounts?: AccountCreateNestedManyWithoutUserInput
     favourites?: UserFavouriteCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPreferencesInput = {
@@ -20674,7 +20422,6 @@ export namespace Prisma {
     timezone?: string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     favourites?: UserFavouriteUncheckedCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPreferencesInput = {
@@ -20733,7 +20480,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     favourites?: UserFavouriteUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreferencesInput = {
@@ -20754,7 +20500,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     favourites?: UserFavouriteUncheckedUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BodyTypeUpsertWithoutUserPreferenceInput = {
@@ -20803,7 +20548,6 @@ export namespace Prisma {
     timezone?: string
     accounts?: AccountCreateNestedManyWithoutUserInput
     preferences?: UserPreferenceCreateNestedOneWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFavouritesInput = {
@@ -20824,7 +20568,6 @@ export namespace Prisma {
     timezone?: string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     preferences?: UserPreferenceUncheckedCreateNestedOneWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFavouritesInput = {
@@ -20911,7 +20654,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     preferences?: UserPreferenceUpdateOneWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFavouritesInput = {
@@ -20932,7 +20674,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     preferences?: UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type OutfitElementsUpsertWithoutFavouritesInput = {
@@ -20997,106 +20738,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserCreateWithoutDigitalClosetsInput = {
-    id?: string
-    name: string
-    email: string
-    emailVerified?: boolean
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    age?: number | null
-    height?: number | null
-    birthday: Date | string
-    gender?: $Enums.Gender
-    isActive?: boolean
-    onboardingCompleted?: boolean
-    privacyLevel?: $Enums.PrivacyLevel
-    timezone?: string
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    preferences?: UserPreferenceCreateNestedOneWithoutUserInput
-    favourites?: UserFavouriteCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutDigitalClosetsInput = {
-    id?: string
-    name: string
-    email: string
-    emailVerified?: boolean
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    age?: number | null
-    height?: number | null
-    birthday: Date | string
-    gender?: $Enums.Gender
-    isActive?: boolean
-    onboardingCompleted?: boolean
-    privacyLevel?: $Enums.PrivacyLevel
-    timezone?: string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    preferences?: UserPreferenceUncheckedCreateNestedOneWithoutUserInput
-    favourites?: UserFavouriteUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutDigitalClosetsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutDigitalClosetsInput, UserUncheckedCreateWithoutDigitalClosetsInput>
-  }
-
-  export type UserUpsertWithoutDigitalClosetsInput = {
-    update: XOR<UserUpdateWithoutDigitalClosetsInput, UserUncheckedUpdateWithoutDigitalClosetsInput>
-    create: XOR<UserCreateWithoutDigitalClosetsInput, UserUncheckedCreateWithoutDigitalClosetsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutDigitalClosetsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutDigitalClosetsInput, UserUncheckedUpdateWithoutDigitalClosetsInput>
-  }
-
-  export type UserUpdateWithoutDigitalClosetsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableIntFieldUpdateOperationsInput | number | null
-    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    privacyLevel?: EnumPrivacyLevelFieldUpdateOperationsInput | $Enums.PrivacyLevel
-    timezone?: StringFieldUpdateOperationsInput | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    preferences?: UserPreferenceUpdateOneWithoutUserNestedInput
-    favourites?: UserFavouriteUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutDigitalClosetsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableIntFieldUpdateOperationsInput | number | null
-    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    privacyLevel?: EnumPrivacyLevelFieldUpdateOperationsInput | $Enums.PrivacyLevel
-    timezone?: StringFieldUpdateOperationsInput | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    preferences?: UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
-    favourites?: UserFavouriteUncheckedUpdateManyWithoutUserNestedInput
-  }
-
   export type AccountCreateManyUserInput = {
     id?: string
     accountId: string
@@ -21121,20 +20762,6 @@ export namespace Prisma {
     userRating?: number | null
     feedbackNotes?: string | null
     selectedAt?: Date | string
-  }
-
-  export type OutfitInDigitalClosetCreateManyUserInput = {
-    id?: string
-    image_url: string
-    image_publicId: string
-    categories?: OutfitInDigitalClosetCreatecategoriesInput | string[]
-    colors?: OutfitInDigitalClosetCreatecolorsInput | string[]
-    fashionStyles?: OutfitInDigitalClosetCreatefashionStylesInput | string[]
-    size: string
-    weatherConds?: OutfitInDigitalClosetCreateweatherCondsInput | string[]
-    brand?: OutfitInDigitalClosetCreatebrandInput | string[]
-    isFavorite?: boolean
-    addedAt?: Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -21212,48 +20839,6 @@ export namespace Prisma {
     userRating?: NullableIntFieldUpdateOperationsInput | number | null
     feedbackNotes?: NullableStringFieldUpdateOperationsInput | string | null
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OutfitInDigitalClosetUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image_url?: StringFieldUpdateOperationsInput | string
-    image_publicId?: StringFieldUpdateOperationsInput | string
-    categories?: OutfitInDigitalClosetUpdatecategoriesInput | string[]
-    colors?: OutfitInDigitalClosetUpdatecolorsInput | string[]
-    fashionStyles?: OutfitInDigitalClosetUpdatefashionStylesInput | string[]
-    size?: StringFieldUpdateOperationsInput | string
-    weatherConds?: OutfitInDigitalClosetUpdateweatherCondsInput | string[]
-    brand?: OutfitInDigitalClosetUpdatebrandInput | string[]
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OutfitInDigitalClosetUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image_url?: StringFieldUpdateOperationsInput | string
-    image_publicId?: StringFieldUpdateOperationsInput | string
-    categories?: OutfitInDigitalClosetUpdatecategoriesInput | string[]
-    colors?: OutfitInDigitalClosetUpdatecolorsInput | string[]
-    fashionStyles?: OutfitInDigitalClosetUpdatefashionStylesInput | string[]
-    size?: StringFieldUpdateOperationsInput | string
-    weatherConds?: OutfitInDigitalClosetUpdateweatherCondsInput | string[]
-    brand?: OutfitInDigitalClosetUpdatebrandInput | string[]
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OutfitInDigitalClosetUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    image_url?: StringFieldUpdateOperationsInput | string
-    image_publicId?: StringFieldUpdateOperationsInput | string
-    categories?: OutfitInDigitalClosetUpdatecategoriesInput | string[]
-    colors?: OutfitInDigitalClosetUpdatecolorsInput | string[]
-    fashionStyles?: OutfitInDigitalClosetUpdatefashionStylesInput | string[]
-    size?: StringFieldUpdateOperationsInput | string
-    weatherConds?: OutfitInDigitalClosetUpdateweatherCondsInput | string[]
-    brand?: OutfitInDigitalClosetUpdatebrandInput | string[]
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserPreferenceCreateManyBodyTypeInput = {

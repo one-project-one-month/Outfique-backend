@@ -17,10 +17,11 @@ router
   .route('/')
   .get(getAddedOutfits)
   .post(addToClosetValidaiton, handleValidationErrors, addOutfit);
-router.route('/:id').patch(favoriteAddedOutfit).delete(removeOutfit);
-
 router
-  .route('/favorite')
-  .patch(updateClosetOutfitValidation, handleValidationErrors, updateAddedOutfit);
+  .route('/:id')
+  .patch(updateClosetOutfitValidation, handleValidationErrors, updateAddedOutfit)
+  .delete(removeOutfit);
+
+router.route('/favorite/:id').patch(favoriteAddedOutfit);
 
 export const digitalClosetRoutes = router;

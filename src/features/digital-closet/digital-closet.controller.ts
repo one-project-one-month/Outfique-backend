@@ -1,6 +1,6 @@
 import catchAsync from '../../utils/catchAsync';
 import { Request, Response, NextFunction } from 'express';
-import { addToClosetDto } from './dto/digital-closet-Dto';
+import { addToClosetDto, updateClosetOutfitDto } from './dto/digital-closet-Dto';
 import { digitalClosetService } from './digital-closet.service';
 import { responseData } from '../../utils/http';
 import { prisma } from '../../database';
@@ -37,7 +37,10 @@ export const removeOutfit = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const updateAddedOutfit = catchAsync(async (req: Request, res: Response) => {
-  const updatedAddedOutfit = await digitalClosetService.updateAddedOutfit(req.params.id, req.body);
+  const updatedAddedOutfit: updateClosetOutfitDto = await digitalClosetService.updateAddedOutfit(
+    req.params.id,
+    req.body
+  );
   return responseData({
     res,
     status: 200,
@@ -46,21 +49,26 @@ export const updateAddedOutfit = catchAsync(async (req: Request, res: Response) 
   });
 });
 
-export const favoriteAddedOutfit = catchAsync(async (req: Request, res: Response) => {
-  const id = req.params.id;
-  const isFavorite = await prisma.outfitInDigitalCloset.findUnique({
-    where: { id: id },
-    select: { isFavorite: true },
-  });
+export const favoriteAddedOutfit = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.params.id;
+    const outfit = await prisma.outfitInDigitalCloset.findUnique({
+      where: { id: id },
+      select: { isFavorite: true },
+    });
+    if (!outfit) {
+      throw new Error('No Outfit Found');
+    }
+    const updatedAddedOutfit = await prisma.outfitInDigitalCloset.update({
+      where: { id: id },
+      data: { isFavorite: !outfit.isFavorite },
+    });
 
-  const updatedAddedOutfit = await prisma.outfitInDigitalCloset.update({
-    where: { id: id },
-    data: { isFavorite: !isFavorite },
-  });
-  return responseData({
-    res,
-    status: 200,
-    message: 'successful',
-    data: updatedAddedOutfit,
-  });
-});
+    return responseData({
+      res,
+      status: 200,
+      message: 'successful',
+      data: updatedAddedOutfit,
+    });
+  }
+);
