@@ -3,7 +3,6 @@ import catchAsync from '../../utils/catchAsync';
 import { saveOutfitDto } from './dto/savedOutfitDto';
 import { saveOutfitService } from './savedOutfit.service';
 import { responseData } from '../../utils/http';
-import { logger } from '../../utils/logger';
 
 export const saveOutfit = catchAsync(async (req: Request, res: Response) => {
   const savedOutfitData: saveOutfitDto = req.body;

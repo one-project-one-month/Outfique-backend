@@ -11,10 +11,10 @@ export interface addToClosetDto {
 }
 
 export interface updateClosetOutfitDto {
-  categories: string[];
-  colors: string[];
-  fashionStyles: string[];
-  size: string;
-  weatherConds: string[];
-  brand: string[];
+  categories?: string[];
+  colors?: string[];
+  fashionStyles?: string[];
+  size?: string;
+  weatherConds?: string[];
+  brand?: string[];
 }
