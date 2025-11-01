@@ -251,26 +251,21 @@ exports.Prisma.UserFavouriteScalarFieldEnum = {
 exports.Prisma.OutfitInDigitalClosetScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  outfitComposition: 'outfitComposition',
-  outfitName: 'outfitName',
-  dominantColors: 'dominantColors',
-  styleTags: 'styleTags',
-  suitableOccasions: 'suitableOccasions',
-  suitableWeather: 'suitableWeather',
-  styleDescription: 'styleDescription',
+  image_url: 'image_url',
+  image_publicId: 'image_publicId',
+  categories: 'categories',
+  colors: 'colors',
+  fashionStyles: 'fashionStyles',
+  size: 'size',
+  weatherConds: 'weatherConds',
+  brand: 'brand',
   isFavorite: 'isFavorite',
-  suggestedAt: 'suggestedAt',
-  seasonRelevance: 'seasonRelevance',
-  trendRelevance: 'trendRelevance'
+  addedAt: 'addedAt'
 };
 
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
-};
-
-exports.Prisma.JsonNullValueInput = {
-  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -281,12 +276,6 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
 };
 exports.Gender = exports.$Enums.Gender = {
   male: 'male',

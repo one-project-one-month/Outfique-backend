@@ -10,10 +10,12 @@ import { handleValidationErrors } from '../../middleware/validation-handler';
 
 const router = Router();
 
-router.route('/').post(saveOutfitValidation, handleValidationErrors, saveOutfit);
+router
+  .route('/')
+  .post(saveOutfitValidation, handleValidationErrors, saveOutfit)
+  .get(getSavedOutfits);
 router
   .route('/:id')
-  .get(getSavedOutfits)
   .delete(removeOutfit)
   .patch(updateSavedOutfitValidation, handleValidationErrors, updateSavedOutfit);
 export const savedOutfitRoutes = router;
