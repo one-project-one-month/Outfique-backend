@@ -7,7 +7,6 @@ generator client {
   output   = "../generated/client"
 }
 
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -89,7 +88,7 @@ model User {
   accounts       Account[]
   preferences    UserPreference?
   favourites     UserFavourite[]
-  digitalClosets OutfitInDigitalCloset[]
+  // digitalClosets OutfitInDigitalCloset[]
 
   @@index([email])
   @@index([isActive])
@@ -162,11 +161,13 @@ model FashionStyle {
 }
 
 model OutfitCategory {
-  id           Int              @id @default(autoincrement())
-  categoryName String           @unique
-  description  String?
-  displayOrder Int              @default(0)
-  elements     OutfitElements[]
+  id                    Int                     @id @default(autoincrement())
+  categoryName          String                  @unique
+  description           String?
+  displayOrder          Int                     @default(0)
+  elements              OutfitElements[]
+
+  
 }
 
 model OutfitElements {
@@ -240,20 +241,19 @@ model UserFavourite {
 }
 
 model OutfitInDigitalCloset {
-  id                Int      @id @default(autoincrement())
-  userId            String
-  outfitComposition Json     @default("{}")
-  outfitName        String
-  dominantColors    Int[]
-  styleTags         String[]
-  suitableOccasions String[]
-  suitableWeather   Int[]
-  styleDescription  String?
-  isFavorite        Boolean  @default(false)
-  suggestedAt       DateTime @default(now())
-  seasonRelevance   Decimal  @default(1.0)
-  trendRelevance    Decimal  @default(0.5)
-
+  id             String         @id @default(uuid())
+  userId         String
+  image_url      String
+  image_publicId String
+  categories      String[]
+  colors         String[]
+  fashionStyles  String[]
+  size           String
+  weatherConds    String[]
+  brand           String[]
+  isFavorite     Boolean        @default(false)
+  addedAt        DateTime       @default(now())
   // Relations
-  user User @relation(fields: [userId], references: [id])
+  // user           User           @relation(fields: [userId], references: [id])
+ 
 }

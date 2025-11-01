@@ -3,7 +3,6 @@ import catchAsync from '../../utils/catchAsync';
 import { saveOutfitDto } from './dto/savedOutfitDto';
 import { saveOutfitService } from './savedOutfit.service';
 import { responseData } from '../../utils/http';
-import { logger } from '../../utils/logger';
 
 export const saveOutfit = catchAsync(async (req: Request, res: Response) => {
   const savedOutfitData: saveOutfitDto = req.body;
@@ -17,8 +16,7 @@ export const saveOutfit = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const getSavedOutfits = catchAsync(async (req: Request, res: Response) => {
-  logger.info('Get User saved outfit');
-  const savedOutfits = await saveOutfitService.getSavedOutfits(req.params.id);
+  const savedOutfits = await saveOutfitService.getSavedOutfits(req.body.userId);
   return responseData({
     res,
     status: 200,

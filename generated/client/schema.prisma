@@ -85,10 +85,10 @@ model User {
   timezone            String       @default("UTC")
 
   // Relations
-  accounts       Account[]
-  preferences    UserPreference?
-  favourites     UserFavourite[]
-  digitalClosets OutfitInDigitalCloset[]
+  accounts    Account[]
+  preferences UserPreference?
+  favourites  UserFavourite[]
+  // digitalClosets OutfitInDigitalCloset[]
 
   @@index([email])
   @@index([isActive])
@@ -239,20 +239,18 @@ model UserFavourite {
 }
 
 model OutfitInDigitalCloset {
-  id                Int      @id @default(autoincrement())
-  userId            String
-  outfitComposition Json     @default("{}")
-  outfitName        String
-  dominantColors    Int[]
-  styleTags         String[]
-  suitableOccasions String[]
-  suitableWeather   Int[]
-  styleDescription  String?
-  isFavorite        Boolean  @default(false)
-  suggestedAt       DateTime @default(now())
-  seasonRelevance   Decimal  @default(1.0)
-  trendRelevance    Decimal  @default(0.5)
-
+  id             String   @id @default(uuid())
+  userId         String
+  image_url      String
+  image_publicId String
+  categories     String[]
+  colors         String[]
+  fashionStyles  String[]
+  size           String
+  weatherConds   String[]
+  brand          String[]
+  isFavorite     Boolean  @default(false)
+  addedAt        DateTime @default(now())
   // Relations
-  user User @relation(fields: [userId], references: [id])
+  // user           User           @relation(fields: [userId], references: [id])
 }

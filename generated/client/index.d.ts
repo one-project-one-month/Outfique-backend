@@ -1964,13 +1964,11 @@ export namespace Prisma {
   export type UserCountOutputType = {
     accounts: number
     favourites: number
-    digitalClosets: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     favourites?: boolean | UserCountOutputTypeCountFavouritesArgs
-    digitalClosets?: boolean | UserCountOutputTypeCountDigitalClosetsArgs
   }
 
   // Custom InputTypes
@@ -1996,13 +1994,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountFavouritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserFavouriteWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountDigitalClosetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OutfitInDigitalClosetWhereInput
   }
 
 
@@ -2419,7 +2410,6 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     preferences?: boolean | User$preferencesArgs<ExtArgs>
     favourites?: boolean | User$favouritesArgs<ExtArgs>
-    digitalClosets?: boolean | User$digitalClosetsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2482,7 +2472,6 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     preferences?: boolean | User$preferencesArgs<ExtArgs>
     favourites?: boolean | User$favouritesArgs<ExtArgs>
-    digitalClosets?: boolean | User$digitalClosetsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2494,7 +2483,6 @@ export namespace Prisma {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       preferences: Prisma.$UserPreferencePayload<ExtArgs> | null
       favourites: Prisma.$UserFavouritePayload<ExtArgs>[]
-      digitalClosets: Prisma.$OutfitInDigitalClosetPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2909,7 +2897,6 @@ export namespace Prisma {
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     preferences<T extends User$preferencesArgs<ExtArgs> = {}>(args?: Subset<T, User$preferencesArgs<ExtArgs>>): Prisma__UserPreferenceClient<$Result.GetResult<Prisma.$UserPreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     favourites<T extends User$favouritesArgs<ExtArgs> = {}>(args?: Subset<T, User$favouritesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserFavouritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    digitalClosets<T extends User$digitalClosetsArgs<ExtArgs> = {}>(args?: Subset<T, User$digitalClosetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutfitInDigitalClosetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3406,30 +3393,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserFavouriteScalarFieldEnum | UserFavouriteScalarFieldEnum[]
-  }
-
-  /**
-   * User.digitalClosets
-   */
-  export type User$digitalClosetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutfitInDigitalCloset
-     */
-    select?: OutfitInDigitalClosetSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the OutfitInDigitalCloset
-     */
-    omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
-    where?: OutfitInDigitalClosetWhereInput
-    orderBy?: OutfitInDigitalClosetOrderByWithRelationInput | OutfitInDigitalClosetOrderByWithRelationInput[]
-    cursor?: OutfitInDigitalClosetWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OutfitInDigitalClosetScalarFieldEnum | OutfitInDigitalClosetScalarFieldEnum[]
   }
 
   /**
@@ -14674,120 +14637,80 @@ export namespace Prisma {
 
   export type AggregateOutfitInDigitalCloset = {
     _count: OutfitInDigitalClosetCountAggregateOutputType | null
-    _avg: OutfitInDigitalClosetAvgAggregateOutputType | null
-    _sum: OutfitInDigitalClosetSumAggregateOutputType | null
     _min: OutfitInDigitalClosetMinAggregateOutputType | null
     _max: OutfitInDigitalClosetMaxAggregateOutputType | null
   }
 
-  export type OutfitInDigitalClosetAvgAggregateOutputType = {
-    id: number | null
-    dominantColors: number | null
-    suitableWeather: number | null
-    seasonRelevance: Decimal | null
-    trendRelevance: Decimal | null
-  }
-
-  export type OutfitInDigitalClosetSumAggregateOutputType = {
-    id: number | null
-    dominantColors: number[]
-    suitableWeather: number[]
-    seasonRelevance: Decimal | null
-    trendRelevance: Decimal | null
-  }
-
   export type OutfitInDigitalClosetMinAggregateOutputType = {
-    id: number | null
+    id: string | null
     userId: string | null
-    outfitName: string | null
-    styleDescription: string | null
+    image_url: string | null
+    image_publicId: string | null
+    size: string | null
     isFavorite: boolean | null
-    suggestedAt: Date | null
-    seasonRelevance: Decimal | null
-    trendRelevance: Decimal | null
+    addedAt: Date | null
   }
 
   export type OutfitInDigitalClosetMaxAggregateOutputType = {
-    id: number | null
+    id: string | null
     userId: string | null
-    outfitName: string | null
-    styleDescription: string | null
+    image_url: string | null
+    image_publicId: string | null
+    size: string | null
     isFavorite: boolean | null
-    suggestedAt: Date | null
-    seasonRelevance: Decimal | null
-    trendRelevance: Decimal | null
+    addedAt: Date | null
   }
 
   export type OutfitInDigitalClosetCountAggregateOutputType = {
     id: number
     userId: number
-    outfitComposition: number
-    outfitName: number
-    dominantColors: number
-    styleTags: number
-    suitableOccasions: number
-    suitableWeather: number
-    styleDescription: number
+    image_url: number
+    image_publicId: number
+    categories: number
+    colors: number
+    fashionStyles: number
+    size: number
+    weatherConds: number
+    brand: number
     isFavorite: number
-    suggestedAt: number
-    seasonRelevance: number
-    trendRelevance: number
+    addedAt: number
     _all: number
   }
 
 
-  export type OutfitInDigitalClosetAvgAggregateInputType = {
-    id?: true
-    dominantColors?: true
-    suitableWeather?: true
-    seasonRelevance?: true
-    trendRelevance?: true
-  }
-
-  export type OutfitInDigitalClosetSumAggregateInputType = {
-    id?: true
-    dominantColors?: true
-    suitableWeather?: true
-    seasonRelevance?: true
-    trendRelevance?: true
-  }
-
   export type OutfitInDigitalClosetMinAggregateInputType = {
     id?: true
     userId?: true
-    outfitName?: true
-    styleDescription?: true
+    image_url?: true
+    image_publicId?: true
+    size?: true
     isFavorite?: true
-    suggestedAt?: true
-    seasonRelevance?: true
-    trendRelevance?: true
+    addedAt?: true
   }
 
   export type OutfitInDigitalClosetMaxAggregateInputType = {
     id?: true
     userId?: true
-    outfitName?: true
-    styleDescription?: true
+    image_url?: true
+    image_publicId?: true
+    size?: true
     isFavorite?: true
-    suggestedAt?: true
-    seasonRelevance?: true
-    trendRelevance?: true
+    addedAt?: true
   }
 
   export type OutfitInDigitalClosetCountAggregateInputType = {
     id?: true
     userId?: true
-    outfitComposition?: true
-    outfitName?: true
-    dominantColors?: true
-    styleTags?: true
-    suitableOccasions?: true
-    suitableWeather?: true
-    styleDescription?: true
+    image_url?: true
+    image_publicId?: true
+    categories?: true
+    colors?: true
+    fashionStyles?: true
+    size?: true
+    weatherConds?: true
+    brand?: true
     isFavorite?: true
-    suggestedAt?: true
-    seasonRelevance?: true
-    trendRelevance?: true
+    addedAt?: true
     _all?: true
   }
 
@@ -14829,18 +14752,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: OutfitInDigitalClosetAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: OutfitInDigitalClosetSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: OutfitInDigitalClosetMinAggregateInputType
@@ -14871,29 +14782,24 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: OutfitInDigitalClosetCountAggregateInputType | true
-    _avg?: OutfitInDigitalClosetAvgAggregateInputType
-    _sum?: OutfitInDigitalClosetSumAggregateInputType
     _min?: OutfitInDigitalClosetMinAggregateInputType
     _max?: OutfitInDigitalClosetMaxAggregateInputType
   }
 
   export type OutfitInDigitalClosetGroupByOutputType = {
-    id: number
+    id: string
     userId: string
-    outfitComposition: JsonValue
-    outfitName: string
-    dominantColors: number[]
-    styleTags: string[]
-    suitableOccasions: string[]
-    suitableWeather: number[]
-    styleDescription: string | null
+    image_url: string
+    image_publicId: string
+    categories: string[]
+    colors: string[]
+    fashionStyles: string[]
+    size: string
+    weatherConds: string[]
+    brand: string[]
     isFavorite: boolean
-    suggestedAt: Date
-    seasonRelevance: Decimal
-    trendRelevance: Decimal
+    addedAt: Date
     _count: OutfitInDigitalClosetCountAggregateOutputType | null
-    _avg: OutfitInDigitalClosetAvgAggregateOutputType | null
-    _sum: OutfitInDigitalClosetSumAggregateOutputType | null
     _min: OutfitInDigitalClosetMinAggregateOutputType | null
     _max: OutfitInDigitalClosetMaxAggregateOutputType | null
   }
@@ -14915,100 +14821,81 @@ export namespace Prisma {
   export type OutfitInDigitalClosetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    outfitComposition?: boolean
-    outfitName?: boolean
-    dominantColors?: boolean
-    styleTags?: boolean
-    suitableOccasions?: boolean
-    suitableWeather?: boolean
-    styleDescription?: boolean
+    image_url?: boolean
+    image_publicId?: boolean
+    categories?: boolean
+    colors?: boolean
+    fashionStyles?: boolean
+    size?: boolean
+    weatherConds?: boolean
+    brand?: boolean
     isFavorite?: boolean
-    suggestedAt?: boolean
-    seasonRelevance?: boolean
-    trendRelevance?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    addedAt?: boolean
   }, ExtArgs["result"]["outfitInDigitalCloset"]>
 
   export type OutfitInDigitalClosetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    outfitComposition?: boolean
-    outfitName?: boolean
-    dominantColors?: boolean
-    styleTags?: boolean
-    suitableOccasions?: boolean
-    suitableWeather?: boolean
-    styleDescription?: boolean
+    image_url?: boolean
+    image_publicId?: boolean
+    categories?: boolean
+    colors?: boolean
+    fashionStyles?: boolean
+    size?: boolean
+    weatherConds?: boolean
+    brand?: boolean
     isFavorite?: boolean
-    suggestedAt?: boolean
-    seasonRelevance?: boolean
-    trendRelevance?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    addedAt?: boolean
   }, ExtArgs["result"]["outfitInDigitalCloset"]>
 
   export type OutfitInDigitalClosetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    outfitComposition?: boolean
-    outfitName?: boolean
-    dominantColors?: boolean
-    styleTags?: boolean
-    suitableOccasions?: boolean
-    suitableWeather?: boolean
-    styleDescription?: boolean
+    image_url?: boolean
+    image_publicId?: boolean
+    categories?: boolean
+    colors?: boolean
+    fashionStyles?: boolean
+    size?: boolean
+    weatherConds?: boolean
+    brand?: boolean
     isFavorite?: boolean
-    suggestedAt?: boolean
-    seasonRelevance?: boolean
-    trendRelevance?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    addedAt?: boolean
   }, ExtArgs["result"]["outfitInDigitalCloset"]>
 
   export type OutfitInDigitalClosetSelectScalar = {
     id?: boolean
     userId?: boolean
-    outfitComposition?: boolean
-    outfitName?: boolean
-    dominantColors?: boolean
-    styleTags?: boolean
-    suitableOccasions?: boolean
-    suitableWeather?: boolean
-    styleDescription?: boolean
+    image_url?: boolean
+    image_publicId?: boolean
+    categories?: boolean
+    colors?: boolean
+    fashionStyles?: boolean
+    size?: boolean
+    weatherConds?: boolean
+    brand?: boolean
     isFavorite?: boolean
-    suggestedAt?: boolean
-    seasonRelevance?: boolean
-    trendRelevance?: boolean
+    addedAt?: boolean
   }
 
-  export type OutfitInDigitalClosetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "outfitComposition" | "outfitName" | "dominantColors" | "styleTags" | "suitableOccasions" | "suitableWeather" | "styleDescription" | "isFavorite" | "suggestedAt" | "seasonRelevance" | "trendRelevance", ExtArgs["result"]["outfitInDigitalCloset"]>
-  export type OutfitInDigitalClosetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type OutfitInDigitalClosetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type OutfitInDigitalClosetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
+  export type OutfitInDigitalClosetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "image_url" | "image_publicId" | "categories" | "colors" | "fashionStyles" | "size" | "weatherConds" | "brand" | "isFavorite" | "addedAt", ExtArgs["result"]["outfitInDigitalCloset"]>
 
   export type $OutfitInDigitalClosetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OutfitInDigitalCloset"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
-      id: number
+      id: string
       userId: string
-      outfitComposition: Prisma.JsonValue
-      outfitName: string
-      dominantColors: number[]
-      styleTags: string[]
-      suitableOccasions: string[]
-      suitableWeather: number[]
-      styleDescription: string | null
+      image_url: string
+      image_publicId: string
+      categories: string[]
+      colors: string[]
+      fashionStyles: string[]
+      size: string
+      weatherConds: string[]
+      brand: string[]
       isFavorite: boolean
-      suggestedAt: Date
-      seasonRelevance: Prisma.Decimal
-      trendRelevance: Prisma.Decimal
+      addedAt: Date
     }, ExtArgs["result"]["outfitInDigitalCloset"]>
     composites: {}
   }
@@ -15403,7 +15290,6 @@ export namespace Prisma {
    */
   export interface Prisma__OutfitInDigitalClosetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15433,19 +15319,18 @@ export namespace Prisma {
    * Fields of the OutfitInDigitalCloset model
    */
   interface OutfitInDigitalClosetFieldRefs {
-    readonly id: FieldRef<"OutfitInDigitalCloset", 'Int'>
+    readonly id: FieldRef<"OutfitInDigitalCloset", 'String'>
     readonly userId: FieldRef<"OutfitInDigitalCloset", 'String'>
-    readonly outfitComposition: FieldRef<"OutfitInDigitalCloset", 'Json'>
-    readonly outfitName: FieldRef<"OutfitInDigitalCloset", 'String'>
-    readonly dominantColors: FieldRef<"OutfitInDigitalCloset", 'Int[]'>
-    readonly styleTags: FieldRef<"OutfitInDigitalCloset", 'String[]'>
-    readonly suitableOccasions: FieldRef<"OutfitInDigitalCloset", 'String[]'>
-    readonly suitableWeather: FieldRef<"OutfitInDigitalCloset", 'Int[]'>
-    readonly styleDescription: FieldRef<"OutfitInDigitalCloset", 'String'>
+    readonly image_url: FieldRef<"OutfitInDigitalCloset", 'String'>
+    readonly image_publicId: FieldRef<"OutfitInDigitalCloset", 'String'>
+    readonly categories: FieldRef<"OutfitInDigitalCloset", 'String[]'>
+    readonly colors: FieldRef<"OutfitInDigitalCloset", 'String[]'>
+    readonly fashionStyles: FieldRef<"OutfitInDigitalCloset", 'String[]'>
+    readonly size: FieldRef<"OutfitInDigitalCloset", 'String'>
+    readonly weatherConds: FieldRef<"OutfitInDigitalCloset", 'String[]'>
+    readonly brand: FieldRef<"OutfitInDigitalCloset", 'String[]'>
     readonly isFavorite: FieldRef<"OutfitInDigitalCloset", 'Boolean'>
-    readonly suggestedAt: FieldRef<"OutfitInDigitalCloset", 'DateTime'>
-    readonly seasonRelevance: FieldRef<"OutfitInDigitalCloset", 'Decimal'>
-    readonly trendRelevance: FieldRef<"OutfitInDigitalCloset", 'Decimal'>
+    readonly addedAt: FieldRef<"OutfitInDigitalCloset", 'DateTime'>
   }
     
 
@@ -15462,10 +15347,6 @@ export namespace Prisma {
      * Omit specific fields from the OutfitInDigitalCloset
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
     /**
      * Filter, which OutfitInDigitalCloset to fetch.
      */
@@ -15485,10 +15366,6 @@ export namespace Prisma {
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
-    /**
      * Filter, which OutfitInDigitalCloset to fetch.
      */
     where: OutfitInDigitalClosetWhereUniqueInput
@@ -15506,10 +15383,6 @@ export namespace Prisma {
      * Omit specific fields from the OutfitInDigitalCloset
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
     /**
      * Filter, which OutfitInDigitalCloset to fetch.
      */
@@ -15559,10 +15432,6 @@ export namespace Prisma {
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
-    /**
      * Filter, which OutfitInDigitalCloset to fetch.
      */
     where?: OutfitInDigitalClosetWhereInput
@@ -15611,10 +15480,6 @@ export namespace Prisma {
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
-    /**
      * Filter, which OutfitInDigitalClosets to fetch.
      */
     where?: OutfitInDigitalClosetWhereInput
@@ -15658,10 +15523,6 @@ export namespace Prisma {
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
-    /**
      * The data needed to create a OutfitInDigitalCloset.
      */
     data: XOR<OutfitInDigitalClosetCreateInput, OutfitInDigitalClosetUncheckedCreateInput>
@@ -15695,10 +15556,6 @@ export namespace Prisma {
      */
     data: OutfitInDigitalClosetCreateManyInput | OutfitInDigitalClosetCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -15713,10 +15570,6 @@ export namespace Prisma {
      * Omit specific fields from the OutfitInDigitalCloset
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
     /**
      * The data needed to update a OutfitInDigitalCloset.
      */
@@ -15769,10 +15622,6 @@ export namespace Prisma {
      * Limit how many OutfitInDigitalClosets to update.
      */
     limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -15787,10 +15636,6 @@ export namespace Prisma {
      * Omit specific fields from the OutfitInDigitalCloset
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
     /**
      * The filter to search for the OutfitInDigitalCloset to update in case it exists.
      */
@@ -15817,10 +15662,6 @@ export namespace Prisma {
      * Omit specific fields from the OutfitInDigitalCloset
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
     /**
      * Filter which OutfitInDigitalCloset to delete.
      */
@@ -15853,10 +15694,6 @@ export namespace Prisma {
      * Omit specific fields from the OutfitInDigitalCloset
      */
     omit?: OutfitInDigitalClosetOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutfitInDigitalClosetInclude<ExtArgs> | null
   }
 
 
@@ -16038,17 +15875,16 @@ export namespace Prisma {
   export const OutfitInDigitalClosetScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
-    outfitComposition: 'outfitComposition',
-    outfitName: 'outfitName',
-    dominantColors: 'dominantColors',
-    styleTags: 'styleTags',
-    suitableOccasions: 'suitableOccasions',
-    suitableWeather: 'suitableWeather',
-    styleDescription: 'styleDescription',
+    image_url: 'image_url',
+    image_publicId: 'image_publicId',
+    categories: 'categories',
+    colors: 'colors',
+    fashionStyles: 'fashionStyles',
+    size: 'size',
+    weatherConds: 'weatherConds',
+    brand: 'brand',
     isFavorite: 'isFavorite',
-    suggestedAt: 'suggestedAt',
-    seasonRelevance: 'seasonRelevance',
-    trendRelevance: 'trendRelevance'
+    addedAt: 'addedAt'
   };
 
   export type OutfitInDigitalClosetScalarFieldEnum = (typeof OutfitInDigitalClosetScalarFieldEnum)[keyof typeof OutfitInDigitalClosetScalarFieldEnum]
@@ -16060,13 +15896,6 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
-
-
-  export const JsonNullValueInput: {
-    JsonNull: typeof JsonNull
-  };
-
-  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -16083,15 +15912,6 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-  export const JsonNullValueFilter: {
-    DbNull: typeof DbNull,
-    JsonNull: typeof JsonNull,
-    AnyNull: typeof AnyNull
-  };
-
-  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -16247,20 +16067,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Json'
-   */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-  /**
-   * Reference to a field of type 'QueryMode'
-   */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -16299,7 +16105,6 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     preferences?: XOR<UserPreferenceNullableScalarRelationFilter, UserPreferenceWhereInput> | null
     favourites?: UserFavouriteListRelationFilter
-    digitalClosets?: OutfitInDigitalClosetListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -16321,7 +16126,6 @@ export namespace Prisma {
     accounts?: AccountOrderByRelationAggregateInput
     preferences?: UserPreferenceOrderByWithRelationInput
     favourites?: UserFavouriteOrderByRelationAggregateInput
-    digitalClosets?: OutfitInDigitalClosetOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -16346,7 +16150,6 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     preferences?: XOR<UserPreferenceNullableScalarRelationFilter, UserPreferenceWhereInput> | null
     favourites?: UserFavouriteListRelationFilter
-    digitalClosets?: OutfitInDigitalClosetListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -17119,97 +16922,87 @@ export namespace Prisma {
     AND?: OutfitInDigitalClosetWhereInput | OutfitInDigitalClosetWhereInput[]
     OR?: OutfitInDigitalClosetWhereInput[]
     NOT?: OutfitInDigitalClosetWhereInput | OutfitInDigitalClosetWhereInput[]
-    id?: IntFilter<"OutfitInDigitalCloset"> | number
+    id?: StringFilter<"OutfitInDigitalCloset"> | string
     userId?: StringFilter<"OutfitInDigitalCloset"> | string
-    outfitComposition?: JsonFilter<"OutfitInDigitalCloset">
-    outfitName?: StringFilter<"OutfitInDigitalCloset"> | string
-    dominantColors?: IntNullableListFilter<"OutfitInDigitalCloset">
-    styleTags?: StringNullableListFilter<"OutfitInDigitalCloset">
-    suitableOccasions?: StringNullableListFilter<"OutfitInDigitalCloset">
-    suitableWeather?: IntNullableListFilter<"OutfitInDigitalCloset">
-    styleDescription?: StringNullableFilter<"OutfitInDigitalCloset"> | string | null
+    image_url?: StringFilter<"OutfitInDigitalCloset"> | string
+    image_publicId?: StringFilter<"OutfitInDigitalCloset"> | string
+    categories?: StringNullableListFilter<"OutfitInDigitalCloset">
+    colors?: StringNullableListFilter<"OutfitInDigitalCloset">
+    fashionStyles?: StringNullableListFilter<"OutfitInDigitalCloset">
+    size?: StringFilter<"OutfitInDigitalCloset"> | string
+    weatherConds?: StringNullableListFilter<"OutfitInDigitalCloset">
+    brand?: StringNullableListFilter<"OutfitInDigitalCloset">
     isFavorite?: BoolFilter<"OutfitInDigitalCloset"> | boolean
-    suggestedAt?: DateTimeFilter<"OutfitInDigitalCloset"> | Date | string
-    seasonRelevance?: DecimalFilter<"OutfitInDigitalCloset"> | Decimal | DecimalJsLike | number | string
-    trendRelevance?: DecimalFilter<"OutfitInDigitalCloset"> | Decimal | DecimalJsLike | number | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    addedAt?: DateTimeFilter<"OutfitInDigitalCloset"> | Date | string
   }
 
   export type OutfitInDigitalClosetOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    outfitComposition?: SortOrder
-    outfitName?: SortOrder
-    dominantColors?: SortOrder
-    styleTags?: SortOrder
-    suitableOccasions?: SortOrder
-    suitableWeather?: SortOrder
-    styleDescription?: SortOrderInput | SortOrder
+    image_url?: SortOrder
+    image_publicId?: SortOrder
+    categories?: SortOrder
+    colors?: SortOrder
+    fashionStyles?: SortOrder
+    size?: SortOrder
+    weatherConds?: SortOrder
+    brand?: SortOrder
     isFavorite?: SortOrder
-    suggestedAt?: SortOrder
-    seasonRelevance?: SortOrder
-    trendRelevance?: SortOrder
-    user?: UserOrderByWithRelationInput
+    addedAt?: SortOrder
   }
 
   export type OutfitInDigitalClosetWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    id?: string
     AND?: OutfitInDigitalClosetWhereInput | OutfitInDigitalClosetWhereInput[]
     OR?: OutfitInDigitalClosetWhereInput[]
     NOT?: OutfitInDigitalClosetWhereInput | OutfitInDigitalClosetWhereInput[]
     userId?: StringFilter<"OutfitInDigitalCloset"> | string
-    outfitComposition?: JsonFilter<"OutfitInDigitalCloset">
-    outfitName?: StringFilter<"OutfitInDigitalCloset"> | string
-    dominantColors?: IntNullableListFilter<"OutfitInDigitalCloset">
-    styleTags?: StringNullableListFilter<"OutfitInDigitalCloset">
-    suitableOccasions?: StringNullableListFilter<"OutfitInDigitalCloset">
-    suitableWeather?: IntNullableListFilter<"OutfitInDigitalCloset">
-    styleDescription?: StringNullableFilter<"OutfitInDigitalCloset"> | string | null
+    image_url?: StringFilter<"OutfitInDigitalCloset"> | string
+    image_publicId?: StringFilter<"OutfitInDigitalCloset"> | string
+    categories?: StringNullableListFilter<"OutfitInDigitalCloset">
+    colors?: StringNullableListFilter<"OutfitInDigitalCloset">
+    fashionStyles?: StringNullableListFilter<"OutfitInDigitalCloset">
+    size?: StringFilter<"OutfitInDigitalCloset"> | string
+    weatherConds?: StringNullableListFilter<"OutfitInDigitalCloset">
+    brand?: StringNullableListFilter<"OutfitInDigitalCloset">
     isFavorite?: BoolFilter<"OutfitInDigitalCloset"> | boolean
-    suggestedAt?: DateTimeFilter<"OutfitInDigitalCloset"> | Date | string
-    seasonRelevance?: DecimalFilter<"OutfitInDigitalCloset"> | Decimal | DecimalJsLike | number | string
-    trendRelevance?: DecimalFilter<"OutfitInDigitalCloset"> | Decimal | DecimalJsLike | number | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    addedAt?: DateTimeFilter<"OutfitInDigitalCloset"> | Date | string
   }, "id">
 
   export type OutfitInDigitalClosetOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    outfitComposition?: SortOrder
-    outfitName?: SortOrder
-    dominantColors?: SortOrder
-    styleTags?: SortOrder
-    suitableOccasions?: SortOrder
-    suitableWeather?: SortOrder
-    styleDescription?: SortOrderInput | SortOrder
+    image_url?: SortOrder
+    image_publicId?: SortOrder
+    categories?: SortOrder
+    colors?: SortOrder
+    fashionStyles?: SortOrder
+    size?: SortOrder
+    weatherConds?: SortOrder
+    brand?: SortOrder
     isFavorite?: SortOrder
-    suggestedAt?: SortOrder
-    seasonRelevance?: SortOrder
-    trendRelevance?: SortOrder
+    addedAt?: SortOrder
     _count?: OutfitInDigitalClosetCountOrderByAggregateInput
-    _avg?: OutfitInDigitalClosetAvgOrderByAggregateInput
     _max?: OutfitInDigitalClosetMaxOrderByAggregateInput
     _min?: OutfitInDigitalClosetMinOrderByAggregateInput
-    _sum?: OutfitInDigitalClosetSumOrderByAggregateInput
   }
 
   export type OutfitInDigitalClosetScalarWhereWithAggregatesInput = {
     AND?: OutfitInDigitalClosetScalarWhereWithAggregatesInput | OutfitInDigitalClosetScalarWhereWithAggregatesInput[]
     OR?: OutfitInDigitalClosetScalarWhereWithAggregatesInput[]
     NOT?: OutfitInDigitalClosetScalarWhereWithAggregatesInput | OutfitInDigitalClosetScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"OutfitInDigitalCloset"> | number
+    id?: StringWithAggregatesFilter<"OutfitInDigitalCloset"> | string
     userId?: StringWithAggregatesFilter<"OutfitInDigitalCloset"> | string
-    outfitComposition?: JsonWithAggregatesFilter<"OutfitInDigitalCloset">
-    outfitName?: StringWithAggregatesFilter<"OutfitInDigitalCloset"> | string
-    dominantColors?: IntNullableListFilter<"OutfitInDigitalCloset">
-    styleTags?: StringNullableListFilter<"OutfitInDigitalCloset">
-    suitableOccasions?: StringNullableListFilter<"OutfitInDigitalCloset">
-    suitableWeather?: IntNullableListFilter<"OutfitInDigitalCloset">
-    styleDescription?: StringNullableWithAggregatesFilter<"OutfitInDigitalCloset"> | string | null
+    image_url?: StringWithAggregatesFilter<"OutfitInDigitalCloset"> | string
+    image_publicId?: StringWithAggregatesFilter<"OutfitInDigitalCloset"> | string
+    categories?: StringNullableListFilter<"OutfitInDigitalCloset">
+    colors?: StringNullableListFilter<"OutfitInDigitalCloset">
+    fashionStyles?: StringNullableListFilter<"OutfitInDigitalCloset">
+    size?: StringWithAggregatesFilter<"OutfitInDigitalCloset"> | string
+    weatherConds?: StringNullableListFilter<"OutfitInDigitalCloset">
+    brand?: StringNullableListFilter<"OutfitInDigitalCloset">
     isFavorite?: BoolWithAggregatesFilter<"OutfitInDigitalCloset"> | boolean
-    suggestedAt?: DateTimeWithAggregatesFilter<"OutfitInDigitalCloset"> | Date | string
-    seasonRelevance?: DecimalWithAggregatesFilter<"OutfitInDigitalCloset"> | Decimal | DecimalJsLike | number | string
-    trendRelevance?: DecimalWithAggregatesFilter<"OutfitInDigitalCloset"> | Decimal | DecimalJsLike | number | string
+    addedAt?: DateTimeWithAggregatesFilter<"OutfitInDigitalCloset"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -17231,7 +17024,6 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     preferences?: UserPreferenceCreateNestedOneWithoutUserInput
     favourites?: UserFavouriteCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -17253,7 +17045,6 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     preferences?: UserPreferenceUncheckedCreateNestedOneWithoutUserInput
     favourites?: UserFavouriteUncheckedCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -17275,7 +17066,6 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     preferences?: UserPreferenceUpdateOneWithoutUserNestedInput
     favourites?: UserFavouriteUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -17297,7 +17087,6 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     preferences?: UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
     favourites?: UserFavouriteUncheckedUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -18110,111 +17899,108 @@ export namespace Prisma {
   }
 
   export type OutfitInDigitalClosetCreateInput = {
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName: string
-    dominantColors?: OutfitInDigitalClosetCreatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetCreatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetCreatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetCreatesuitableWeatherInput | number[]
-    styleDescription?: string | null
+    id?: string
+    userId: string
+    image_url: string
+    image_publicId: string
+    categories?: OutfitInDigitalClosetCreatecategoriesInput | string[]
+    colors?: OutfitInDigitalClosetCreatecolorsInput | string[]
+    fashionStyles?: OutfitInDigitalClosetCreatefashionStylesInput | string[]
+    size: string
+    weatherConds?: OutfitInDigitalClosetCreateweatherCondsInput | string[]
+    brand?: OutfitInDigitalClosetCreatebrandInput | string[]
     isFavorite?: boolean
-    suggestedAt?: Date | string
-    seasonRelevance?: Decimal | DecimalJsLike | number | string
-    trendRelevance?: Decimal | DecimalJsLike | number | string
-    user: UserCreateNestedOneWithoutDigitalClosetsInput
+    addedAt?: Date | string
   }
 
   export type OutfitInDigitalClosetUncheckedCreateInput = {
-    id?: number
+    id?: string
     userId: string
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName: string
-    dominantColors?: OutfitInDigitalClosetCreatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetCreatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetCreatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetCreatesuitableWeatherInput | number[]
-    styleDescription?: string | null
+    image_url: string
+    image_publicId: string
+    categories?: OutfitInDigitalClosetCreatecategoriesInput | string[]
+    colors?: OutfitInDigitalClosetCreatecolorsInput | string[]
+    fashionStyles?: OutfitInDigitalClosetCreatefashionStylesInput | string[]
+    size: string
+    weatherConds?: OutfitInDigitalClosetCreateweatherCondsInput | string[]
+    brand?: OutfitInDigitalClosetCreatebrandInput | string[]
     isFavorite?: boolean
-    suggestedAt?: Date | string
-    seasonRelevance?: Decimal | DecimalJsLike | number | string
-    trendRelevance?: Decimal | DecimalJsLike | number | string
+    addedAt?: Date | string
   }
 
   export type OutfitInDigitalClosetUpdateInput = {
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName?: StringFieldUpdateOperationsInput | string
-    dominantColors?: OutfitInDigitalClosetUpdatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetUpdatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetUpdatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetUpdatesuitableWeatherInput | number[]
-    styleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    image_url?: StringFieldUpdateOperationsInput | string
+    image_publicId?: StringFieldUpdateOperationsInput | string
+    categories?: OutfitInDigitalClosetUpdatecategoriesInput | string[]
+    colors?: OutfitInDigitalClosetUpdatecolorsInput | string[]
+    fashionStyles?: OutfitInDigitalClosetUpdatefashionStylesInput | string[]
+    size?: StringFieldUpdateOperationsInput | string
+    weatherConds?: OutfitInDigitalClosetUpdateweatherCondsInput | string[]
+    brand?: OutfitInDigitalClosetUpdatebrandInput | string[]
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    suggestedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seasonRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    trendRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    user?: UserUpdateOneRequiredWithoutDigitalClosetsNestedInput
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OutfitInDigitalClosetUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName?: StringFieldUpdateOperationsInput | string
-    dominantColors?: OutfitInDigitalClosetUpdatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetUpdatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetUpdatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetUpdatesuitableWeatherInput | number[]
-    styleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    image_url?: StringFieldUpdateOperationsInput | string
+    image_publicId?: StringFieldUpdateOperationsInput | string
+    categories?: OutfitInDigitalClosetUpdatecategoriesInput | string[]
+    colors?: OutfitInDigitalClosetUpdatecolorsInput | string[]
+    fashionStyles?: OutfitInDigitalClosetUpdatefashionStylesInput | string[]
+    size?: StringFieldUpdateOperationsInput | string
+    weatherConds?: OutfitInDigitalClosetUpdateweatherCondsInput | string[]
+    brand?: OutfitInDigitalClosetUpdatebrandInput | string[]
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    suggestedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seasonRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    trendRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OutfitInDigitalClosetCreateManyInput = {
-    id?: number
+    id?: string
     userId: string
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName: string
-    dominantColors?: OutfitInDigitalClosetCreatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetCreatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetCreatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetCreatesuitableWeatherInput | number[]
-    styleDescription?: string | null
+    image_url: string
+    image_publicId: string
+    categories?: OutfitInDigitalClosetCreatecategoriesInput | string[]
+    colors?: OutfitInDigitalClosetCreatecolorsInput | string[]
+    fashionStyles?: OutfitInDigitalClosetCreatefashionStylesInput | string[]
+    size: string
+    weatherConds?: OutfitInDigitalClosetCreateweatherCondsInput | string[]
+    brand?: OutfitInDigitalClosetCreatebrandInput | string[]
     isFavorite?: boolean
-    suggestedAt?: Date | string
-    seasonRelevance?: Decimal | DecimalJsLike | number | string
-    trendRelevance?: Decimal | DecimalJsLike | number | string
+    addedAt?: Date | string
   }
 
   export type OutfitInDigitalClosetUpdateManyMutationInput = {
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName?: StringFieldUpdateOperationsInput | string
-    dominantColors?: OutfitInDigitalClosetUpdatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetUpdatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetUpdatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetUpdatesuitableWeatherInput | number[]
-    styleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    image_url?: StringFieldUpdateOperationsInput | string
+    image_publicId?: StringFieldUpdateOperationsInput | string
+    categories?: OutfitInDigitalClosetUpdatecategoriesInput | string[]
+    colors?: OutfitInDigitalClosetUpdatecolorsInput | string[]
+    fashionStyles?: OutfitInDigitalClosetUpdatefashionStylesInput | string[]
+    size?: StringFieldUpdateOperationsInput | string
+    weatherConds?: OutfitInDigitalClosetUpdateweatherCondsInput | string[]
+    brand?: OutfitInDigitalClosetUpdatebrandInput | string[]
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    suggestedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seasonRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    trendRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OutfitInDigitalClosetUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName?: StringFieldUpdateOperationsInput | string
-    dominantColors?: OutfitInDigitalClosetUpdatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetUpdatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetUpdatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetUpdatesuitableWeatherInput | number[]
-    styleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    image_url?: StringFieldUpdateOperationsInput | string
+    image_publicId?: StringFieldUpdateOperationsInput | string
+    categories?: OutfitInDigitalClosetUpdatecategoriesInput | string[]
+    colors?: OutfitInDigitalClosetUpdatecolorsInput | string[]
+    fashionStyles?: OutfitInDigitalClosetUpdatefashionStylesInput | string[]
+    size?: StringFieldUpdateOperationsInput | string
+    weatherConds?: OutfitInDigitalClosetUpdateweatherCondsInput | string[]
+    brand?: OutfitInDigitalClosetUpdatebrandInput | string[]
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    suggestedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seasonRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    trendRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -18305,12 +18091,6 @@ export namespace Prisma {
     none?: UserFavouriteWhereInput
   }
 
-  export type OutfitInDigitalClosetListRelationFilter = {
-    every?: OutfitInDigitalClosetWhereInput
-    some?: OutfitInDigitalClosetWhereInput
-    none?: OutfitInDigitalClosetWhereInput
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -18321,10 +18101,6 @@ export namespace Prisma {
   }
 
   export type UserFavouriteOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type OutfitInDigitalClosetOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19122,108 +18898,40 @@ export namespace Prisma {
     _min?: NestedEnumSelectionReasonNullableFilter<$PrismaModel>
     _max?: NestedEnumSelectionReasonNullableFilter<$PrismaModel>
   }
-  export type JsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
 
   export type OutfitInDigitalClosetCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    outfitComposition?: SortOrder
-    outfitName?: SortOrder
-    dominantColors?: SortOrder
-    styleTags?: SortOrder
-    suitableOccasions?: SortOrder
-    suitableWeather?: SortOrder
-    styleDescription?: SortOrder
+    image_url?: SortOrder
+    image_publicId?: SortOrder
+    categories?: SortOrder
+    colors?: SortOrder
+    fashionStyles?: SortOrder
+    size?: SortOrder
+    weatherConds?: SortOrder
+    brand?: SortOrder
     isFavorite?: SortOrder
-    suggestedAt?: SortOrder
-    seasonRelevance?: SortOrder
-    trendRelevance?: SortOrder
-  }
-
-  export type OutfitInDigitalClosetAvgOrderByAggregateInput = {
-    id?: SortOrder
-    dominantColors?: SortOrder
-    suitableWeather?: SortOrder
-    seasonRelevance?: SortOrder
-    trendRelevance?: SortOrder
+    addedAt?: SortOrder
   }
 
   export type OutfitInDigitalClosetMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    outfitName?: SortOrder
-    styleDescription?: SortOrder
+    image_url?: SortOrder
+    image_publicId?: SortOrder
+    size?: SortOrder
     isFavorite?: SortOrder
-    suggestedAt?: SortOrder
-    seasonRelevance?: SortOrder
-    trendRelevance?: SortOrder
+    addedAt?: SortOrder
   }
 
   export type OutfitInDigitalClosetMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    outfitName?: SortOrder
-    styleDescription?: SortOrder
+    image_url?: SortOrder
+    image_publicId?: SortOrder
+    size?: SortOrder
     isFavorite?: SortOrder
-    suggestedAt?: SortOrder
-    seasonRelevance?: SortOrder
-    trendRelevance?: SortOrder
-  }
-
-  export type OutfitInDigitalClosetSumOrderByAggregateInput = {
-    id?: SortOrder
-    dominantColors?: SortOrder
-    suitableWeather?: SortOrder
-    seasonRelevance?: SortOrder
-    trendRelevance?: SortOrder
-  }
-  export type JsonWithAggregatesFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedJsonFilter<$PrismaModel>
-    _max?: NestedJsonFilter<$PrismaModel>
+    addedAt?: SortOrder
   }
 
   export type AccountCreateNestedManyWithoutUserInput = {
@@ -19246,13 +18954,6 @@ export namespace Prisma {
     connect?: UserFavouriteWhereUniqueInput | UserFavouriteWhereUniqueInput[]
   }
 
-  export type OutfitInDigitalClosetCreateNestedManyWithoutUserInput = {
-    create?: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput> | OutfitInDigitalClosetCreateWithoutUserInput[] | OutfitInDigitalClosetUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OutfitInDigitalClosetCreateOrConnectWithoutUserInput | OutfitInDigitalClosetCreateOrConnectWithoutUserInput[]
-    createMany?: OutfitInDigitalClosetCreateManyUserInputEnvelope
-    connect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-  }
-
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -19271,13 +18972,6 @@ export namespace Prisma {
     connectOrCreate?: UserFavouriteCreateOrConnectWithoutUserInput | UserFavouriteCreateOrConnectWithoutUserInput[]
     createMany?: UserFavouriteCreateManyUserInputEnvelope
     connect?: UserFavouriteWhereUniqueInput | UserFavouriteWhereUniqueInput[]
-  }
-
-  export type OutfitInDigitalClosetUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput> | OutfitInDigitalClosetCreateWithoutUserInput[] | OutfitInDigitalClosetUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OutfitInDigitalClosetCreateOrConnectWithoutUserInput | OutfitInDigitalClosetCreateOrConnectWithoutUserInput[]
-    createMany?: OutfitInDigitalClosetCreateManyUserInputEnvelope
-    connect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -19350,20 +19044,6 @@ export namespace Prisma {
     deleteMany?: UserFavouriteScalarWhereInput | UserFavouriteScalarWhereInput[]
   }
 
-  export type OutfitInDigitalClosetUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput> | OutfitInDigitalClosetCreateWithoutUserInput[] | OutfitInDigitalClosetUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OutfitInDigitalClosetCreateOrConnectWithoutUserInput | OutfitInDigitalClosetCreateOrConnectWithoutUserInput[]
-    upsert?: OutfitInDigitalClosetUpsertWithWhereUniqueWithoutUserInput | OutfitInDigitalClosetUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OutfitInDigitalClosetCreateManyUserInputEnvelope
-    set?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    disconnect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    delete?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    connect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    update?: OutfitInDigitalClosetUpdateWithWhereUniqueWithoutUserInput | OutfitInDigitalClosetUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OutfitInDigitalClosetUpdateManyWithWhereWithoutUserInput | OutfitInDigitalClosetUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OutfitInDigitalClosetScalarWhereInput | OutfitInDigitalClosetScalarWhereInput[]
-  }
-
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -19400,20 +19080,6 @@ export namespace Prisma {
     update?: UserFavouriteUpdateWithWhereUniqueWithoutUserInput | UserFavouriteUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserFavouriteUpdateManyWithWhereWithoutUserInput | UserFavouriteUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserFavouriteScalarWhereInput | UserFavouriteScalarWhereInput[]
-  }
-
-  export type OutfitInDigitalClosetUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput> | OutfitInDigitalClosetCreateWithoutUserInput[] | OutfitInDigitalClosetUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: OutfitInDigitalClosetCreateOrConnectWithoutUserInput | OutfitInDigitalClosetCreateOrConnectWithoutUserInput[]
-    upsert?: OutfitInDigitalClosetUpsertWithWhereUniqueWithoutUserInput | OutfitInDigitalClosetUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: OutfitInDigitalClosetCreateManyUserInputEnvelope
-    set?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    disconnect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    delete?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    connect?: OutfitInDigitalClosetWhereUniqueInput | OutfitInDigitalClosetWhereUniqueInput[]
-    update?: OutfitInDigitalClosetUpdateWithWhereUniqueWithoutUserInput | OutfitInDigitalClosetUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: OutfitInDigitalClosetUpdateManyWithWhereWithoutUserInput | OutfitInDigitalClosetUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: OutfitInDigitalClosetScalarWhereInput | OutfitInDigitalClosetScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -19767,54 +19433,49 @@ export namespace Prisma {
     update?: XOR<XOR<WeatherTypeUpdateToOneWithWhereWithoutUserFavouriteInput, WeatherTypeUpdateWithoutUserFavouriteInput>, WeatherTypeUncheckedUpdateWithoutUserFavouriteInput>
   }
 
-  export type OutfitInDigitalClosetCreatedominantColorsInput = {
-    set: number[]
-  }
-
-  export type OutfitInDigitalClosetCreatestyleTagsInput = {
+  export type OutfitInDigitalClosetCreatecategoriesInput = {
     set: string[]
   }
 
-  export type OutfitInDigitalClosetCreatesuitableOccasionsInput = {
+  export type OutfitInDigitalClosetCreatecolorsInput = {
     set: string[]
   }
 
-  export type OutfitInDigitalClosetCreatesuitableWeatherInput = {
-    set: number[]
+  export type OutfitInDigitalClosetCreatefashionStylesInput = {
+    set: string[]
   }
 
-  export type UserCreateNestedOneWithoutDigitalClosetsInput = {
-    create?: XOR<UserCreateWithoutDigitalClosetsInput, UserUncheckedCreateWithoutDigitalClosetsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDigitalClosetsInput
-    connect?: UserWhereUniqueInput
+  export type OutfitInDigitalClosetCreateweatherCondsInput = {
+    set: string[]
   }
 
-  export type OutfitInDigitalClosetUpdatedominantColorsInput = {
-    set?: number[]
-    push?: number | number[]
+  export type OutfitInDigitalClosetCreatebrandInput = {
+    set: string[]
   }
 
-  export type OutfitInDigitalClosetUpdatestyleTagsInput = {
+  export type OutfitInDigitalClosetUpdatecategoriesInput = {
     set?: string[]
     push?: string | string[]
   }
 
-  export type OutfitInDigitalClosetUpdatesuitableOccasionsInput = {
+  export type OutfitInDigitalClosetUpdatecolorsInput = {
     set?: string[]
     push?: string | string[]
   }
 
-  export type OutfitInDigitalClosetUpdatesuitableWeatherInput = {
-    set?: number[]
-    push?: number | number[]
+  export type OutfitInDigitalClosetUpdatefashionStylesInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
-  export type UserUpdateOneRequiredWithoutDigitalClosetsNestedInput = {
-    create?: XOR<UserCreateWithoutDigitalClosetsInput, UserUncheckedCreateWithoutDigitalClosetsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDigitalClosetsInput
-    upsert?: UserUpsertWithoutDigitalClosetsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDigitalClosetsInput, UserUpdateWithoutDigitalClosetsInput>, UserUncheckedUpdateWithoutDigitalClosetsInput>
+  export type OutfitInDigitalClosetUpdateweatherCondsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type OutfitInDigitalClosetUpdatebrandInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -20146,29 +19807,6 @@ export namespace Prisma {
     _min?: NestedEnumSelectionReasonNullableFilter<$PrismaModel>
     _max?: NestedEnumSelectionReasonNullableFilter<$PrismaModel>
   }
-  export type NestedJsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
 
   export type AccountCreateWithoutUserInput = {
     id?: string
@@ -20268,45 +19906,6 @@ export namespace Prisma {
 
   export type UserFavouriteCreateManyUserInputEnvelope = {
     data: UserFavouriteCreateManyUserInput | UserFavouriteCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type OutfitInDigitalClosetCreateWithoutUserInput = {
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName: string
-    dominantColors?: OutfitInDigitalClosetCreatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetCreatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetCreatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetCreatesuitableWeatherInput | number[]
-    styleDescription?: string | null
-    isFavorite?: boolean
-    suggestedAt?: Date | string
-    seasonRelevance?: Decimal | DecimalJsLike | number | string
-    trendRelevance?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type OutfitInDigitalClosetUncheckedCreateWithoutUserInput = {
-    id?: number
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName: string
-    dominantColors?: OutfitInDigitalClosetCreatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetCreatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetCreatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetCreatesuitableWeatherInput | number[]
-    styleDescription?: string | null
-    isFavorite?: boolean
-    suggestedAt?: Date | string
-    seasonRelevance?: Decimal | DecimalJsLike | number | string
-    trendRelevance?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type OutfitInDigitalClosetCreateOrConnectWithoutUserInput = {
-    where: OutfitInDigitalClosetWhereUniqueInput
-    create: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput>
-  }
-
-  export type OutfitInDigitalClosetCreateManyUserInputEnvelope = {
-    data: OutfitInDigitalClosetCreateManyUserInput | OutfitInDigitalClosetCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -20412,41 +20011,6 @@ export namespace Prisma {
     selectedAt?: DateTimeFilter<"UserFavourite"> | Date | string
   }
 
-  export type OutfitInDigitalClosetUpsertWithWhereUniqueWithoutUserInput = {
-    where: OutfitInDigitalClosetWhereUniqueInput
-    update: XOR<OutfitInDigitalClosetUpdateWithoutUserInput, OutfitInDigitalClosetUncheckedUpdateWithoutUserInput>
-    create: XOR<OutfitInDigitalClosetCreateWithoutUserInput, OutfitInDigitalClosetUncheckedCreateWithoutUserInput>
-  }
-
-  export type OutfitInDigitalClosetUpdateWithWhereUniqueWithoutUserInput = {
-    where: OutfitInDigitalClosetWhereUniqueInput
-    data: XOR<OutfitInDigitalClosetUpdateWithoutUserInput, OutfitInDigitalClosetUncheckedUpdateWithoutUserInput>
-  }
-
-  export type OutfitInDigitalClosetUpdateManyWithWhereWithoutUserInput = {
-    where: OutfitInDigitalClosetScalarWhereInput
-    data: XOR<OutfitInDigitalClosetUpdateManyMutationInput, OutfitInDigitalClosetUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type OutfitInDigitalClosetScalarWhereInput = {
-    AND?: OutfitInDigitalClosetScalarWhereInput | OutfitInDigitalClosetScalarWhereInput[]
-    OR?: OutfitInDigitalClosetScalarWhereInput[]
-    NOT?: OutfitInDigitalClosetScalarWhereInput | OutfitInDigitalClosetScalarWhereInput[]
-    id?: IntFilter<"OutfitInDigitalCloset"> | number
-    userId?: StringFilter<"OutfitInDigitalCloset"> | string
-    outfitComposition?: JsonFilter<"OutfitInDigitalCloset">
-    outfitName?: StringFilter<"OutfitInDigitalCloset"> | string
-    dominantColors?: IntNullableListFilter<"OutfitInDigitalCloset">
-    styleTags?: StringNullableListFilter<"OutfitInDigitalCloset">
-    suitableOccasions?: StringNullableListFilter<"OutfitInDigitalCloset">
-    suitableWeather?: IntNullableListFilter<"OutfitInDigitalCloset">
-    styleDescription?: StringNullableFilter<"OutfitInDigitalCloset"> | string | null
-    isFavorite?: BoolFilter<"OutfitInDigitalCloset"> | boolean
-    suggestedAt?: DateTimeFilter<"OutfitInDigitalCloset"> | Date | string
-    seasonRelevance?: DecimalFilter<"OutfitInDigitalCloset"> | Decimal | DecimalJsLike | number | string
-    trendRelevance?: DecimalFilter<"OutfitInDigitalCloset"> | Decimal | DecimalJsLike | number | string
-  }
-
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name: string
@@ -20465,7 +20029,6 @@ export namespace Prisma {
     timezone?: string
     preferences?: UserPreferenceCreateNestedOneWithoutUserInput
     favourites?: UserFavouriteCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -20486,7 +20049,6 @@ export namespace Prisma {
     timezone?: string
     preferences?: UserPreferenceUncheckedCreateNestedOneWithoutUserInput
     favourites?: UserFavouriteUncheckedCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -20523,7 +20085,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     preferences?: UserPreferenceUpdateOneWithoutUserNestedInput
     favourites?: UserFavouriteUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -20544,7 +20105,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     preferences?: UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
     favourites?: UserFavouriteUncheckedUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserPreferenceCreateWithoutBodyTypeInput = {
@@ -20842,7 +20402,6 @@ export namespace Prisma {
     timezone?: string
     accounts?: AccountCreateNestedManyWithoutUserInput
     favourites?: UserFavouriteCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPreferencesInput = {
@@ -20863,7 +20422,6 @@ export namespace Prisma {
     timezone?: string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     favourites?: UserFavouriteUncheckedCreateNestedManyWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPreferencesInput = {
@@ -20922,7 +20480,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     favourites?: UserFavouriteUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPreferencesInput = {
@@ -20943,7 +20500,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     favourites?: UserFavouriteUncheckedUpdateManyWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BodyTypeUpsertWithoutUserPreferenceInput = {
@@ -20992,7 +20548,6 @@ export namespace Prisma {
     timezone?: string
     accounts?: AccountCreateNestedManyWithoutUserInput
     preferences?: UserPreferenceCreateNestedOneWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFavouritesInput = {
@@ -21013,7 +20568,6 @@ export namespace Prisma {
     timezone?: string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     preferences?: UserPreferenceUncheckedCreateNestedOneWithoutUserInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFavouritesInput = {
@@ -21100,7 +20654,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     preferences?: UserPreferenceUpdateOneWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFavouritesInput = {
@@ -21121,7 +20674,6 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     preferences?: UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
-    digitalClosets?: OutfitInDigitalClosetUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type OutfitElementsUpsertWithoutFavouritesInput = {
@@ -21186,106 +20738,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserCreateWithoutDigitalClosetsInput = {
-    id?: string
-    name: string
-    email: string
-    emailVerified?: boolean
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    age?: number | null
-    height?: number | null
-    birthday: Date | string
-    gender?: $Enums.Gender
-    isActive?: boolean
-    onboardingCompleted?: boolean
-    privacyLevel?: $Enums.PrivacyLevel
-    timezone?: string
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    preferences?: UserPreferenceCreateNestedOneWithoutUserInput
-    favourites?: UserFavouriteCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutDigitalClosetsInput = {
-    id?: string
-    name: string
-    email: string
-    emailVerified?: boolean
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    age?: number | null
-    height?: number | null
-    birthday: Date | string
-    gender?: $Enums.Gender
-    isActive?: boolean
-    onboardingCompleted?: boolean
-    privacyLevel?: $Enums.PrivacyLevel
-    timezone?: string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    preferences?: UserPreferenceUncheckedCreateNestedOneWithoutUserInput
-    favourites?: UserFavouriteUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutDigitalClosetsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutDigitalClosetsInput, UserUncheckedCreateWithoutDigitalClosetsInput>
-  }
-
-  export type UserUpsertWithoutDigitalClosetsInput = {
-    update: XOR<UserUpdateWithoutDigitalClosetsInput, UserUncheckedUpdateWithoutDigitalClosetsInput>
-    create: XOR<UserCreateWithoutDigitalClosetsInput, UserUncheckedCreateWithoutDigitalClosetsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutDigitalClosetsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutDigitalClosetsInput, UserUncheckedUpdateWithoutDigitalClosetsInput>
-  }
-
-  export type UserUpdateWithoutDigitalClosetsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableIntFieldUpdateOperationsInput | number | null
-    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    privacyLevel?: EnumPrivacyLevelFieldUpdateOperationsInput | $Enums.PrivacyLevel
-    timezone?: StringFieldUpdateOperationsInput | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    preferences?: UserPreferenceUpdateOneWithoutUserNestedInput
-    favourites?: UserFavouriteUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutDigitalClosetsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableIntFieldUpdateOperationsInput | number | null
-    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
-    privacyLevel?: EnumPrivacyLevelFieldUpdateOperationsInput | $Enums.PrivacyLevel
-    timezone?: StringFieldUpdateOperationsInput | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    preferences?: UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
-    favourites?: UserFavouriteUncheckedUpdateManyWithoutUserNestedInput
-  }
-
   export type AccountCreateManyUserInput = {
     id?: string
     accountId: string
@@ -21310,21 +20762,6 @@ export namespace Prisma {
     userRating?: number | null
     feedbackNotes?: string | null
     selectedAt?: Date | string
-  }
-
-  export type OutfitInDigitalClosetCreateManyUserInput = {
-    id?: number
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName: string
-    dominantColors?: OutfitInDigitalClosetCreatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetCreatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetCreatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetCreatesuitableWeatherInput | number[]
-    styleDescription?: string | null
-    isFavorite?: boolean
-    suggestedAt?: Date | string
-    seasonRelevance?: Decimal | DecimalJsLike | number | string
-    trendRelevance?: Decimal | DecimalJsLike | number | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -21402,50 +20839,6 @@ export namespace Prisma {
     userRating?: NullableIntFieldUpdateOperationsInput | number | null
     feedbackNotes?: NullableStringFieldUpdateOperationsInput | string | null
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OutfitInDigitalClosetUpdateWithoutUserInput = {
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName?: StringFieldUpdateOperationsInput | string
-    dominantColors?: OutfitInDigitalClosetUpdatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetUpdatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetUpdatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetUpdatesuitableWeatherInput | number[]
-    styleDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    suggestedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seasonRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    trendRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-  }
-
-  export type OutfitInDigitalClosetUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName?: StringFieldUpdateOperationsInput | string
-    dominantColors?: OutfitInDigitalClosetUpdatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetUpdatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetUpdatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetUpdatesuitableWeatherInput | number[]
-    styleDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    suggestedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seasonRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    trendRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-  }
-
-  export type OutfitInDigitalClosetUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    outfitComposition?: JsonNullValueInput | InputJsonValue
-    outfitName?: StringFieldUpdateOperationsInput | string
-    dominantColors?: OutfitInDigitalClosetUpdatedominantColorsInput | number[]
-    styleTags?: OutfitInDigitalClosetUpdatestyleTagsInput | string[]
-    suitableOccasions?: OutfitInDigitalClosetUpdatesuitableOccasionsInput | string[]
-    suitableWeather?: OutfitInDigitalClosetUpdatesuitableWeatherInput | number[]
-    styleDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    suggestedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seasonRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    trendRelevance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type UserPreferenceCreateManyBodyTypeInput = {
