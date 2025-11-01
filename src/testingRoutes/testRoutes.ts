@@ -18,7 +18,7 @@ router.post(
     if (!file) {
       return next(new AppError('Image not found', 400));
     }
-    const result = await cloudinaryUpload(file, 'testFolder');
+    const result = await cloudinaryUpload(file, process.env.CLOUDINARY_FOLDER_NAME);
     return responseData({
       res,
       status: 200,
@@ -36,7 +36,7 @@ router.post(
     if (!file) {
       return next(new AppError('Image not found', 400));
     }
-    const result = await cloudinaryRemoveBgUpload(file, 'testFolder');
+    const result = await cloudinaryRemoveBgUpload(file, process.env.CLOUDINARY_FOLDER_NAME);
     return responseData({
       res,
       status: 200,
